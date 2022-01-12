@@ -1,0 +1,9 @@
+package com.btkAkademi.rentACar.core.utilities.business;
+
+public class BusinessRules {
+	
+	public static Result run(Result[] ...logics) {
+		
+	}
+
+}

@@ -1,0 +1,19 @@
+package com.btkAkademi.rentACar.business.requests.carRequest;
+
+import javax.persistence.Column;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class CreateCarRequest {
+	private int brand_id;
+	private int color_id;
+	private double daily_price;
+	private int modelYear;
+	private int findexScore;
+	private int kilometer;
+	private String description;
+}

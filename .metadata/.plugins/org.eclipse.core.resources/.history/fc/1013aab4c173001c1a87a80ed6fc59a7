@@ -1,0 +1,18 @@
+package com.btkAkademi.rentACar.business.concretes;
+
+import org.springframework.stereotype.Service;
+
+import com.btkAkademi.rentACar.business.abstracts.CustomerService;
+import com.btkAkademi.rentACar.core.utilities.results.Result;
+
+@Service
+public class CustomerManager implements CustomerService {
+
+	@Override
+	public Result getByCustomerId(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
+}

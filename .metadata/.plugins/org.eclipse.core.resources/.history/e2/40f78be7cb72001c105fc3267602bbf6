@@ -1,0 +1,11 @@
+package com.btkAkademi.rentACar.business.abstracts;
+
+import java.util.List;
+
+import com.btkAkademi.rentACar.business.dtos.BrandListDto;
+import com.btkAkademi.rentACar.business.dtos.ColorListDto;
+
+public interface ColorService {
+
+	DataResult<List<ColorListDto>> getAll();
+}

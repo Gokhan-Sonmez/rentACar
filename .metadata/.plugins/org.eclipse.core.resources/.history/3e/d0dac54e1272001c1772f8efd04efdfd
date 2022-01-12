@@ -1,0 +1,5 @@
+spackage com.btkAkademi.rentACar.dataAccess.abstracts;
+
+public interface CarDao {
+
+}

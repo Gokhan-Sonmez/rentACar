@@ -1,0 +1,10 @@
+package com.btkAkademi.rentACar.entities.concretes;
+
+import lombok.Data;
+
+@Data
+public class Color {
+	private int id;
+	private String name;
+
+}

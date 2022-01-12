@@ -1,0 +1,15 @@
+package com.btkAkademi.rentACar.business.concretes;
+
+import com.btkAkademi.rentACar.business.abstracts.IndividualCustomerService;
+import com.btkAkademi.rentACar.business.requests.individualCustomer.CreateIndividualCustomeRequest;
+import com.btkAkademi.rentACar.core.utilities.results.Result;
+
+public class IndividualCustomerManager implements IndividualCustomerService {
+
+	@Override
+	public Result add(CreateIndividualCustomeRequest createIndividualCustomeRequest) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

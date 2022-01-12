@@ -1,0 +1,42 @@
+package com.btkAkademi.rentACar.business.concretes;
+
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.btkAkademi.rentACar.business.dtos.CarListDto;
+import com.btkAkademi.rentACar.business.dtos.ColorListDto;
+import com.btkAkademi.rentACar.core.utilities.mapping.ModelMapperServices;
+import com.btkAkademi.rentACar.dataAccess.abstracts.CarDao;
+import com.btkAkademi.rentACar.dataAccess.abstracts.ColorDao;
+import com.btkAkademi.rentACar.entities.concretes.Car;
+import com.btkAkademi.rentACar.entities.concretes.Color;
+
+@Service
+public class ColorManager implemets ColorService {
+	private ColorDao colorDao;
+	private ModelMapperServices modelMapperServices;
+	@Autowired
+	public ColorManager(ColorDao colorDao, ModelMapperServices modelMapperService) {
+		
+		this.colorDao = colorDao;
+		this.modelMapperServices = modelMapperService;
+	}
+	@Override
+	public List<ColorListDto> getAll() {
+		public List<ColorListDto> getAll() {
+			List<Color> colorList = this.colorDao.findAll();
+			List<ColorListDto> reponse = colorList.stream()
+					.map(color->modelMapperService.forDto()
+					.map(color, CarListDto.class))
+					.collect(Collectors.toList());
+			
+			return reponse;
+	}
+	
+	
+	
+}

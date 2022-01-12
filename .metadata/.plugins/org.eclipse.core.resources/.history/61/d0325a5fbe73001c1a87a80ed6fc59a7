@@ -1,0 +1,28 @@
+package com.btkAkademi.rentACar.business.concretes;
+
+import com.btkAkademi.rentACar.business.abstracts.CorparateCustomerService;
+import com.btkAkademi.rentACar.business.requests.corparateCustomerRequest.CreateCorparateCustomerRequest;
+import com.btkAkademi.rentACar.core.utilities.mapping.ModelMapperService;
+import com.btkAkademi.rentACar.core.utilities.results.Result;
+
+public class CorparateCustomerManager implements CorparateCustomerService{
+
+	private CorparateCustomerService corparateCustomerService;
+	private ModelMapperService modelMapperService;
+	
+	
+	public CorparateCustomerManager(CorparateCustomerService corparateCustomerService,
+			ModelMapperService modelMapperService) {
+		
+		this.corparateCustomerService = corparateCustomerService;
+		this.modelMapperService = modelMapperService;
+	}
+
+
+	@Override
+	public Result add(CreateCorparateCustomerRequest createCorparateCustomeRequest) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

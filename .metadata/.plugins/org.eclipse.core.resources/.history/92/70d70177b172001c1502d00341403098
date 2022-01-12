@@ -1,0 +1,26 @@
+package com.btkAkademi.rentACar.ws.conteollers;
+
+import java.util.List;
+
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.btkAkademi.rentACar.business.abstracts.BrandService;
+import com.btkAkademi.rentACar.business.dtos.BrandListDto;
+
+@RestController
+@RequestMapping("/api/brands")
+public class BrandsController {
+
+	private BrandService brandService;
+
+	public BrandsController(BrandService brandService) {
+		super();
+		this.brandService = brandService;
+	}
+	
+	public List<BrandListDto> getall(){
+		return this.brandService.getAll();
+	}
+	
+}

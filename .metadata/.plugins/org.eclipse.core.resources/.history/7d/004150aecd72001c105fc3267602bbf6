@@ -1,0 +1,5 @@
+package com.btkAkademi.rentACar.business.constants;
+
+public class Messages {
+
+}

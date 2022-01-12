@@ -1,0 +1,13 @@
+package com.btkAkademi.rentACar.business.abstracts;
+
+import java.util.List;
+
+import com.btkAkademi.rentACar.business.dtos.BrandListDto;
+
+
+
+public interface BrandService {
+
+	List<BrandListDto> getAll();
+	Result add(BrandCreateDto);
+}

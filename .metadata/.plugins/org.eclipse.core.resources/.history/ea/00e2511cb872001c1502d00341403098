@@ -1,0 +1,23 @@
+package com.btkAkademi.rentACar.ws.conteollers;
+
+import java.util.List;
+
+import org.springframework.web.bind.annotation.GetMapping;
+
+import com.btkAkademi.rentACar.business.abstracts.BrandService;
+import com.btkAkademi.rentACar.business.dtos.BrandListDto;
+
+public class ColorsContoller {
+
+	private ColorService brandService;
+
+	public ColorsController(ColorService colorService) {
+		super();
+		this.colorService = colorService;
+	}
+	
+	@GetMapping("getall")
+	public List<ColorListDto> getall(){
+		return this.colorService.getAll();
+	}
+}

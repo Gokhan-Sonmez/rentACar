@@ -1,0 +1,14 @@
+package com.btkAkademi.rentACar.entities.concretes;
+
+
+
+
+
+
+public class IndividualCustomer extends Customer {
+
+	private String firstName;
+	private String lastName;
+	private Localdate birtdate;
+}
+   

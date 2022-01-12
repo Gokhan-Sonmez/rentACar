@@ -1,0 +1,32 @@
+package com.btkAkademi.rentACar.business.concretes;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.btkAkademi.rentACar.business.abstracts.CarService;
+import com.btkAkademi.rentACar.business.dtos.CarListDto;
+import com.btkAkademi.rentACar.core.utilities.mapping.ModelMapperServices;
+import com.btkAkademi.rentACar.dataAccess.abstracts.CarDao;
+
+@Service
+public class CarManager implements CarService {
+
+	private CarDao carDao;
+	private ModelMapperServices modelMapperServices;
+	@Autowired
+	public CarManager(CarDao carDao, ModelMapperServices modelMapperServices) {
+		
+		this.carDao = carDao;
+		this.modelMapperServices = modelMapperServices;
+	}
+	@Override
+	public List<CarListDto> getAll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	
+	
+}

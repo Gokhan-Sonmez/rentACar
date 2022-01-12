@@ -1,0 +1,14 @@
+package com.btkAkademi.rentACar.business.requests.colorRequest;
+
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
+import com.btkAkademi.rentACar.business.constants.Messages;
+
+public class CreateColorRequest {
+
+	
+	@NotBlank
+	@Size(min=3, max=20, message = Messages.invalidColorName)
+	private String name;
+}

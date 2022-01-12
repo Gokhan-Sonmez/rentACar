@@ -1,0 +1,37 @@
+package com.btkAkademi.rentACar.business.concretes;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.btkAkademi.rentACar.business.abstracts.CorparateCustomerService;
+import com.btkAkademi.rentACar.business.constants.Messages;
+import com.btkAkademi.rentACar.business.requests.corparateCustomerRequest.CreateCorparateCustomerRequest;
+import com.btkAkademi.rentACar.core.utilities.mapping.ModelMapperService;
+import com.btkAkademi.rentACar.core.utilities.results.Result;
+import com.btkAkademi.rentACar.core.utilities.results.SuccessResult;
+import com.btkAkademi.rentACar.entities.concretes.CorpareteCustomer;
+
+@Service
+public class CorparateCustomerManager implements CorparateCustomerService{
+
+	private CorparateCustomerDao corparateCustomerService;
+	private ModelMapperService modelMapperService;
+	
+	@Autowired
+	public CorparateCustomerManager(CorparateCustomerService corparateCustomerService,
+			ModelMapperService modelMapperService) {
+		
+		this.corparateCustomerService = corparateCustomerService;
+		this.modelMapperService = modelMapperService;
+	}
+
+
+	@Override
+	public Result add(CreateCorparateCustomerRequest createCorparateCustomeRequest) {
+		CorpareteCustomer corparateCustomer = this.modelMapperService.forRequest().map(createCorparateCustomeRequest,CorpareteCustomer.class);
+		this.corparateCustomerService.;
+		
+		return new SuccessResult(Messages.brandAdded);
+	}
+
+}

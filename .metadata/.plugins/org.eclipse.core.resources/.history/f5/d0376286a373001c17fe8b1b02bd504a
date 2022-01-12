@@ -1,0 +1,23 @@
+package com.btkAkademi.rentACar.entities.concretes;
+
+import java.time.LocalDate;
+
+import javax.persistence.Entity;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Entity
+@Table(name="rentals")
+public class Rental {
+
+	private int id;
+	private LocalDate rentDate;
+	private LocalDate returnDate;
+	private int rentedKilometer;
+	private int returnKilometer;
+}

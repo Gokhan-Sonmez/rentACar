@@ -1,0 +1,16 @@
+package com.btkAkademi.rentACar.entities.concretes;
+
+import lombok.Data;
+
+@Data
+public class Car {
+	
+	private int id;
+	private double dailyPrice;
+	private int modelYear;
+	private String description;
+	private int findexScore;
+	private int kilometer;
+	
+
+}

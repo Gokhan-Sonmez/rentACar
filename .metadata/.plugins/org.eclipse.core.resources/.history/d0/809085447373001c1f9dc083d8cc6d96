@@ -1,0 +1,8 @@
+package com.btkAkademi.rentACar.business.requests.carRequest;
+
+public class CreateCarRequest {
+
+	
+	private double daily_price;
+	private String description;
+}

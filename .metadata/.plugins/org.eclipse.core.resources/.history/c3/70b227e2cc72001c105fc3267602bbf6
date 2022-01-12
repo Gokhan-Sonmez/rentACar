@@ -1,0 +1,6 @@
+package com.btkAkademi.rentACar.business.requests.brandRequest;
+
+public class CreateBrandRequest {
+
+	private String name;
+}
