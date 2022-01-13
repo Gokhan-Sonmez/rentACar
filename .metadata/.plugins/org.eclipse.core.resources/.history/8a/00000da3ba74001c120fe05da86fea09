@@ -4,12 +4,12 @@ import java.util.List;
 
 import javax.validation.Valid;
 
-
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.btkAkademi.rentACar.business.abstracts.CarService;
@@ -36,7 +36,7 @@ public class CarsController {
 	}
 	
 	@GetMapping("getallbypage")
-	DataResult<List<CarListDto>> getAll(@RequestParam int pageNo,@RequestParam(defaultValue = "10") int pageSize){
+	DataResult<List<CarListDto>> getAll(int pageNo,int pageSize , @PageableDefault(value = 10) Pageable pageable){
 		
 		return this.carService.getAll(pageNo,pageSize);
 		

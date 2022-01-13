@@ -36,7 +36,7 @@ public class CarsController {
 	}
 	
 	@GetMapping("getallbypage")
-	DataResult<List<CarListDto>> getAll(@RequestParam int pageNo,@RequestParam(defaultValue = "10") int pageSize){
+	DataResult<List<CarListDto>> getAll(int pageNo,@RequestParam(defaultValue = "10") int pageSize){
 		
 		return this.carService.getAll(pageNo,pageSize);
 		

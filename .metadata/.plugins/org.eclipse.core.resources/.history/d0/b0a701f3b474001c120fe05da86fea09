@@ -14,8 +14,6 @@ public interface CarService {
 
 	
 	DataResult<List<CarListDto>> getAll();
-	DataResult<List<CarListDto>> getAll(int pageNo,int pageSize);
-	
 	DataResult<Car> getByCarId(int carId);
 
 	Result add(CreateCarRequest createCarRequest);

@@ -93,7 +93,6 @@ public class CarManager implements CarService {
 		
 		
 		Pageable pageable = PageRequest.of(pageNo-1, pageSize);
-		
 		List<Car> carList = this.carDao.findAll(pageable).getContent();
 		List<CarListDto> response = carList.stream()
 				.map(car->modelMapperService.forDto()
