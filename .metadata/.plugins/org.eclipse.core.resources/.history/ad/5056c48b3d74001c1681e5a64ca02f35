@@ -1,0 +1,22 @@
+package com.btkAkademi.rentACar.entities.concretes;
+
+import javax.persistence.Table;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Table(name="car-maintenances")
+public class CarMaintenance {
+	
+	
+	private int id;
+	
+	private Boolean maintenance;
+	
+	
+
+}

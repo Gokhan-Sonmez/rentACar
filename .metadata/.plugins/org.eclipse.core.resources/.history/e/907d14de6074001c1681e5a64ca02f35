@@ -1,0 +1,12 @@
+package com.btkAkademi.rentACar.business.requests.carDamageRequest;
+
+
+
+public class CreateCarDamageRequest {
+
+	
+
+	private int carId;
+	private String description;
+	
+}

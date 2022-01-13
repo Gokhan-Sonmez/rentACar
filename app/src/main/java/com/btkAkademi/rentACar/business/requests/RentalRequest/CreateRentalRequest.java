@@ -2,8 +2,6 @@ package com.btkAkademi.rentACar.business.requests.RentalRequest;
 
 import java.time.LocalDate;
 
-import com.btkAkademi.rentACar.entities.concretes.Customer;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,7 +11,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CreateRentalRequest {
 
-	private Customer customer;
+	private int customerId;
+	
+	private int carId;
 
 	private LocalDate rentDate;
 	
@@ -26,6 +26,9 @@ public class CreateRentalRequest {
 
 	private int returnKilometer;
 	
+	private int pickUpCityId;
+	
+	private int returnCityId;
 	
 	
 }

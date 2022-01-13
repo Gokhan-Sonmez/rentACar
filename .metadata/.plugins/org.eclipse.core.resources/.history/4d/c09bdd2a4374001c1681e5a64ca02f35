@@ -1,0 +1,16 @@
+package com.btkAkademi.rentACar.business.requests.carMaintenanceRequest;
+
+import java.time.LocalDate;
+
+import com.btkAkademi.rentACar.entities.concretes.Car;
+
+public class CreateCarMaintenanceRequest {
+
+private Car car; 
+	
+	private Boolean maintenance;
+	
+	private LocalDate rentDate;
+	
+	private LocalDate returnDate;
+}

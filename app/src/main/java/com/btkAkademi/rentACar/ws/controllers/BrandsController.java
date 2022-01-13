@@ -39,7 +39,7 @@ public class BrandsController {
 		
 		return this.brandService.add(createBrandRequest);
 	}
-@PostMapping("update")
+   @PostMapping("update")
 	
 	public Result update(@RequestBody @Valid UpdateBrandRequest updateBrandRequest) {
 		

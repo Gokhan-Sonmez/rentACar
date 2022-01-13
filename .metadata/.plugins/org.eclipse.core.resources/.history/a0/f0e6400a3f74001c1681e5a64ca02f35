@@ -1,0 +1,17 @@
+package com.btkAkademi.rentACar.business.dtos;
+
+import java.time.LocalDate;
+
+
+
+public class CarMaintenanceListDto {
+	
+	
+	
+	private Boolean maintenance;
+	
+	private LocalDate rentDate;
+	
+	private LocalDate returnDate;
+
+}

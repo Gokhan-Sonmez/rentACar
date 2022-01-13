@@ -17,6 +17,11 @@ public class IndividualCustomerController {
 
 	private IndividualCustomerService individualCustomerService;
 	
+public IndividualCustomerController(IndividualCustomerService individualCustomerService) {
+		super();
+		this.individualCustomerService = individualCustomerService;
+	}
+
 @PostMapping("add")
 	
 	public Result add(@RequestBody @Valid CreateIndividualCustomeRequest individualCustomerRequest) {

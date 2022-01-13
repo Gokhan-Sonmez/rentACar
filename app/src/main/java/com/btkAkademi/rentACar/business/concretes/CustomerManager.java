@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.btkAkademi.rentACar.business.abstracts.CustomerService;
+import com.btkAkademi.rentACar.core.utilities.results.ErrorResult;
 import com.btkAkademi.rentACar.core.utilities.results.Result;
 import com.btkAkademi.rentACar.core.utilities.results.SuccessResult;
 import com.btkAkademi.rentACar.dataAccess.abstracts.CustomerDao;
@@ -20,8 +21,13 @@ public class CustomerManager implements CustomerService {
 
 	@Override
 	public Result getByCustomerId(int id) {
-		this.customerdao.getById(id);
-		 return new SuccessResult();
+		if(this.customerdao.existsById(id)) {
+			
+			 return new SuccessResult();
+		}
+		
+		return new ErrorResult();
+		
 	}
 
 	

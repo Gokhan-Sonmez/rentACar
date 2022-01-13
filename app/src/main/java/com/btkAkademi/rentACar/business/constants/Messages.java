@@ -22,10 +22,17 @@ public class Messages {
 	public static final String birthdateNotEnough = "birthdate.not.enough";
 	
 	public static final String rentalAdded = "rental.added";
-	public static final String rentalIdNotExists = "rental.id.not.exists";
+	public static final String customerIdNotExists = "customer.id.not.exists";
 	public static final String corparateCustomerAdded = "corparate.customer.added";
 	public static final String companyNameExists = "corparate.name.exists";
 	public static final String notCorrectKilometer = "not.correct.kilometer";
 	public static final String notCorrectReturnDate = "not.correct.return.date";
-	
+	public static final String carMaintenanceAdded = "maintenance.added";
+	public static final String carInMaintenance  = "car.in.maintanance";
+	public static final String carDamageAdded = "car.damage.added";
+	public static final String carRented = "car.rented";
+	public static final String cityAdded = "car.added";
+	public static final String cityNameExists = "car.name.exists";
+	public static final String cityExist = "city.exist";
+	public static final String additionalServiceAdded = "additional.service.added";
 }

@@ -37,7 +37,7 @@ public class BrandManager implements BrandService {
 	@Override
 	public 
     DataResult<List<BrandListDto>> getAll() {
-		List<Brand> brandList = this.brandDao.findAll()	;
+		List<Brand> brandList = this.brandDao.findAll();
 		List<BrandListDto> response = brandList.stream()
 				.map(brand->modelMapperService.forDto()
 				.map(brand, BrandListDto.class))

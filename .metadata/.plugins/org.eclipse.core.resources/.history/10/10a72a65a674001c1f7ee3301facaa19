@@ -1,0 +1,25 @@
+package com.btkAkademi.rentACar.business.concretes;
+
+import java.util.List;
+
+import com.btkAkademi.rentACar.business.abstracts.AdditionalServiceService;
+import com.btkAkademi.rentACar.business.dtos.AdditionalServiceListDto;
+import com.btkAkademi.rentACar.business.requests.additionalService.CreateAdditionalServiceRequest;
+import com.btkAkademi.rentACar.core.utilities.results.DataResult;
+import com.btkAkademi.rentACar.core.utilities.results.Result;
+
+public class AdditionalServiceManager implements AdditionalServiceService {
+
+	@Override
+	public DataResult<List<AdditionalServiceListDto>> getAll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Result add(CreateAdditionalServiceRequest createAdditionalServiceRequest) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

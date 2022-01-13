@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.Period;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.btkAkademi.rentACar.business.abstracts.IndividualCustomerService;
 import com.btkAkademi.rentACar.business.constants.Messages;
@@ -16,6 +17,7 @@ import com.btkAkademi.rentACar.core.utilities.results.SuccessResult;
 import com.btkAkademi.rentACar.dataAccess.abstracts.IndividualCustomerDao;
 import com.btkAkademi.rentACar.entities.concretes.IndividualCustomer;
 
+@Service
 public class IndividualCustomerManager implements IndividualCustomerService {
 
 	
@@ -34,7 +36,8 @@ public class IndividualCustomerManager implements IndividualCustomerService {
 	public Result add(CreateIndividualCustomeRequest createIndividualCustomeRequest) {
 		
 		Result result = BusinessRules.run(
-				checkIfEmailExists(createIndividualCustomeRequest.getEmail()),checkIfMoreThean18(createIndividualCustomeRequest.getBirtdate()));
+				checkIfEmailExists(createIndividualCustomeRequest.getEmail()),
+				checkIfMoreThean18(createIndividualCustomeRequest.getBirthDate()));
 		
 		if(result!=null) {
 			
@@ -49,9 +52,9 @@ public class IndividualCustomerManager implements IndividualCustomerService {
 	
   private Result checkIfEmailExists(String email)
   {
-	  var Result = this.individualCustomerDao.getByEmail(email);
+	 
 	  
-	  if(Result!=null) {
+	  if(individualCustomerDao.getByEmail(email)!=null) {
 		  return new ErrorResult(Messages.emailExists);
 	  }
 	  return new SuccessResult();

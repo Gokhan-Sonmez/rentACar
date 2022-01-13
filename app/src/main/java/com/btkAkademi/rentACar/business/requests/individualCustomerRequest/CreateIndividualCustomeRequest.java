@@ -15,5 +15,5 @@ public class CreateIndividualCustomeRequest {
 	private String firstName;
 	private String lastName;
     private String email;
-	private LocalDate birtdate;
+	private LocalDate birthDate;
 }

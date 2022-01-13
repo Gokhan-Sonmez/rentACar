@@ -1,0 +1,16 @@
+package com.btkAkademi.rentACar.business.concretes;
+
+import com.btkAkademi.rentACar.business.abstracts.CityService;
+import com.btkAkademi.rentACar.business.requests.cityRequest.CreateCityRequest;
+import com.btkAkademi.rentACar.core.utilities.results.Result;
+import com.btkAkademi.rentACar.entities.concretes.City;
+
+public class CityManager implements CityService{
+
+	@Override
+	public Result add(CreateCityRequest createCityRequest) {
+		City city = 
+		return null;
+	}
+
+}
