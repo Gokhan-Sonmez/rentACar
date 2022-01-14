@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.btkAkademi.rentACar.business.abstracts.CarService;
 import com.btkAkademi.rentACar.business.constants.Messages;
+import com.btkAkademi.rentACar.business.dtos.CarDto;
 import com.btkAkademi.rentACar.business.dtos.CarListDto;
 import com.btkAkademi.rentACar.business.requests.carRequest.CreateCarRequest;
 import com.btkAkademi.rentACar.business.requests.carRequest.UpdateCarRequest;
@@ -113,6 +114,14 @@ public class CarManager implements CarService {
 			   return new ErrorResult(Messages.carIdNotExists);
 		   }
 		   return new SuccessResult();
+	}
+
+	@Override
+	public DataResult<CarDto> getAllCarById(int carId) {
+		Car car = this.carDao.findById(carId).get();
+		CarDto response = modelMapperService.forDto().map(car, CarDto.class);
+
+		return new SuccessDataResult<CarDto>(response);
 	}
 
 	

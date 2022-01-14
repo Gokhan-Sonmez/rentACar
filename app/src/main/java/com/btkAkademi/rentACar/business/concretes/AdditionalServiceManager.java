@@ -55,4 +55,16 @@ public class AdditionalServiceManager implements AdditionalServiceService {
 		return new SuccessResult(Messages.additionalServiceAdded);
 	}
 
+	@Override
+	public DataResult<AdditionalService> getByRentalId(int rentalId) {
+		AdditionalService additionalService = this.additionalServiceDao.getById(rentalId);
+		return new SuccessDataResult<AdditionalService>(additionalService);
+	}
+
+	@Override
+	public DataResult<List<AdditionalService>> getAllRentalId(int rentalId) {
+		List<AdditionalService> additionalService = this.additionalServiceDao.findByRentalId(rentalId);
+		return new SuccessDataResult<List<AdditionalService>>(additionalService);
+	}
+
 }

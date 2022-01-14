@@ -6,6 +6,6 @@ import com.btkAkademi.rentACar.entities.concretes.Rental;
 
 public interface RentalDao extends JpaRepository<Rental, Integer>{
 
-	
+	Rental findByCarId(int carId);
 	Rental findByCarIdAndReturnDateIsNull(int carId);
 }

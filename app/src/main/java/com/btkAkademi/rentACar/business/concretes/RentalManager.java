@@ -12,13 +12,12 @@ import com.btkAkademi.rentACar.business.abstracts.CityService;
 import com.btkAkademi.rentACar.business.abstracts.CustomerService;
 import com.btkAkademi.rentACar.business.abstracts.RentalService;
 import com.btkAkademi.rentACar.business.constants.Messages;
-
+import com.btkAkademi.rentACar.business.dtos.RentalDto;
 import com.btkAkademi.rentACar.business.dtos.RentalListDto;
 import com.btkAkademi.rentACar.business.requests.RentalRequest.CreateRentalRequest;
 import com.btkAkademi.rentACar.core.utilities.business.BusinessRules;
 import com.btkAkademi.rentACar.core.utilities.mapping.ModelMapperService;
 import com.btkAkademi.rentACar.core.utilities.results.DataResult;
-import com.btkAkademi.rentACar.core.utilities.results.ErrorDataResult;
 import com.btkAkademi.rentACar.core.utilities.results.ErrorResult;
 import com.btkAkademi.rentACar.core.utilities.results.Result;
 import com.btkAkademi.rentACar.core.utilities.results.SuccessDataResult;
@@ -104,11 +103,11 @@ public class RentalManager implements RentalService {
 	}
 	
 	@Override
-	public DataResult<Rental> getRentalById(int id) {
-		if(rentalDao.existsById(id)) {
-			return new SuccessDataResult<Rental>(rentalDao.getById(id));
-		}
-		else return new ErrorDataResult<Rental>();
+	public DataResult<RentalDto> getById(int id) {
+		Rental rental = this.rentalDao.findById(id).get();
+		RentalDto response = modelMapperService.forDto().map(rental, RentalDto.class);
+
+		return new SuccessDataResult<RentalDto>(response);
 	}
 
 	
@@ -167,6 +166,16 @@ public class RentalManager implements RentalService {
 			return new ErrorResult(Messages.cityExist);
 		}
 		return new SuccessResult();
+	}
+
+
+
+
+
+	@Override
+	public DataResult<Rental> getByCarId(int id) {
+		Rental rental = this.rentalDao.findByCarId(id);
+		return new SuccessDataResult<Rental>(rental);
 	}
 
 

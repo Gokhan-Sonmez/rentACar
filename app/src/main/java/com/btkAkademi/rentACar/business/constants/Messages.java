@@ -35,4 +35,5 @@ public class Messages {
 	public static final String cityNameExists = "car.name.exists";
 	public static final String cityExist = "city.exist";
 	public static final String additionalServiceAdded = "additional.service.added";
+	public static final String paymentAdded =  "payment.added";
 }
