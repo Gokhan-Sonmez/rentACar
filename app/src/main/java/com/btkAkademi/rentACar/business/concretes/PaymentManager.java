@@ -18,11 +18,14 @@ import com.btkAkademi.rentACar.business.dtos.CarDto;
 import com.btkAkademi.rentACar.business.dtos.PaymentListDto;
 import com.btkAkademi.rentACar.business.dtos.RentalDto;
 import com.btkAkademi.rentACar.business.requests.paymentRequest.CreatePaymentRequest;
+import com.btkAkademi.rentACar.core.utilities.business.BusinessRules;
 import com.btkAkademi.rentACar.core.utilities.mapping.ModelMapperService;
 import com.btkAkademi.rentACar.core.utilities.results.DataResult;
+import com.btkAkademi.rentACar.core.utilities.results.ErrorResult;
 import com.btkAkademi.rentACar.core.utilities.results.Result;
 import com.btkAkademi.rentACar.core.utilities.results.SuccessDataResult;
 import com.btkAkademi.rentACar.core.utilities.results.SuccessResult;
+import com.btkAkademi.rentACar.core.utilities.services.IsBankPosService;
 import com.btkAkademi.rentACar.dataAccess.abstracts.PaymentDao;
 import com.btkAkademi.rentACar.entities.concretes.AdditionalService;
 
@@ -37,6 +40,7 @@ public class PaymentManager implements PaymentService{
 	private AdditionalServiceService additionalServiceService;
 	private RentalService rentalService;
 	private CarService carService;
+	private IsBankPosService isBankPosService;
 	
 	
 	
@@ -45,13 +49,16 @@ public class PaymentManager implements PaymentService{
 			ModelMapperService modelMapperService,
 			RentalService rentalService,
 			AdditionalServiceService additionalServiceService,
-			CarService carService) {
+			CarService carService,
+			IsBankPosService isBankPosService
+			) {
 		super();
 		this.paymentDao = paymentDao;
 		this.modelMapperService = modelMapperService;
 		this.additionalServiceService =additionalServiceService;
 		this.rentalService = rentalService;
 		this.carService=carService;
+		this.isBankPosService = isBankPosService;
 	}
 
 	
@@ -71,6 +78,15 @@ public class PaymentManager implements PaymentService{
 
 	@Override
 	public Result add(CreatePaymentRequest createPaymentRequest) {
+		
+		
+		Result result = BusinessRules.run(
+				checkIfLimitIsEnough("1",1));
+		
+		if(result!=null) {
+			
+			return result;
+		}
 		
 		Payment payment = modelMapperService.forRequest().map(createPaymentRequest, Payment.class);
 		
@@ -116,5 +132,16 @@ public class PaymentManager implements PaymentService{
 
 	    }
 	
+	  
+	  private Result checkIfLimitIsEnough(String cardNo,int cvv)
+	  {
+		  var result = this.isBankPosService.checkIfLimitIsEnough(cardNo, cvv);
+		  
+		  if(!result) {
+			   
+			   return new ErrorResult(Messages.cardLimitNotEnough);
+		   }
+		   return new SuccessResult();
+	  }
 
 }

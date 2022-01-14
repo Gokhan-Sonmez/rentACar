@@ -36,4 +36,5 @@ public class Messages {
 	public static final String cityExist = "city.exist";
 	public static final String additionalServiceAdded = "additional.service.added";
 	public static final String paymentAdded =  "payment.added";
+	public static final String cardLimitNotEnough = "card.limit.not.enough";
 }
