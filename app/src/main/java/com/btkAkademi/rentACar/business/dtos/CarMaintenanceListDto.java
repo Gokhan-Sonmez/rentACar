@@ -14,6 +14,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CarMaintenanceListDto {
 	
+	private int id;
+	
 	private int carId; 
 	
     private LocalDate maintenanceStart;

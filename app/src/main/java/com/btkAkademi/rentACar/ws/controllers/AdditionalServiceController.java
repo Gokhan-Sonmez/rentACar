@@ -37,6 +37,13 @@ public class AdditionalServiceController {
 		return this.additionalServiceService.getAll();
 	}
 	
+	@GetMapping("get-by-id/{id}")
+	public Result getById(@PathVariable int id) {
+		return additionalServiceService.getById(id);
+		
+	}
+	
+	
 	@GetMapping("get-all-by-rental-id/{id}")
 	public Result getAllByRentalId(@PathVariable int id) {
 		return additionalServiceService.getAllRentalId(id);

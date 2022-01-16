@@ -107,7 +107,7 @@ public class PaymentManager implements PaymentService{
 	        long days = ChronoUnit.DAYS.between( rental.getRentDate() , rental.getReturnDate()) ;
 	      
 	        //dependency
-	       CarDto carDto = carService.getAllCarById(rental.getCarId()).getData();
+	       CarDto carDto = carService.getCarById(rental.getCarId()).getData();
 	        List<AdditionalService> additionalService = additionalServiceService.getAllRentalId(rentalId).getData();
 
 	      

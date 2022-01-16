@@ -102,9 +102,9 @@ public class BrandManager implements BrandService {
 		Brand brand = this.brandDao.findByName(brandname);
 
 		if (brand != null) {
-			return new ErrorResult(Messages.brandNameExists);
+			return new ErrorResult(Messages.brandNameNotExists);
 		}
-		return new SuccessResult();
+		return new SuccessResult(Messages.brandNameExists);
 
 	}
 

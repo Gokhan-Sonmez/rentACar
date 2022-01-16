@@ -10,6 +10,7 @@ public class Messages {
 	public static final String brandNotDeleted = "brand.not.deleted";
 	public static final String brandIdNotExists = "brand.id.not.exists";
 	public static final String brandListed = "brand.listed";
+	public static final String brandNameNotExists = "brand.name.not.exists";
 	
 	public static final String invalidColorName ="invalid.color.name";
 	public static final String colorAdded = "color.added";
@@ -30,6 +31,8 @@ public class Messages {
 	public static final String individualCustomerAdded ="individual.customer.added";
 	public static final String individualCustomerDeleted ="individual.customer.deleted";
 	public static final String individualCustomerUpdated ="individual.customer.updated";
+	public static final String individualCustomerIdNotExists = "individual.customer.id.not.exists";
+	public static final String individualCustomerListed = "individual.customer.listed";
 	
 	public static final String emailExists = "email.exists";
 	public static final String birthdateNotEnough = "birthdate.not.enough";
@@ -37,6 +40,8 @@ public class Messages {
 	public static final String rentalAdded = "rental.added";
 	public static final String rentalUpdated = "rental.updated";
 	public static final String rentalDeleted = "rental.deleted";
+	public static final String rentalIdExist = "rental.id.exist";
+	public static final String rentalListed = "rental.listed";
 	
 	public static final String customerIdNotExists = "customer.id.not.exists";
 	
@@ -50,13 +55,18 @@ public class Messages {
 	public static final String notCorrectReturnDate = "not.correct.return.date";
 	
 	public static final String carMaintenanceAdded = "maintenance.added";
+	public static final String carMaintenanceUpdated = "maintenance.updated";
+	public static final String carMaintenanceDeleted = "maintenance.deleted";
+	public static final String carMaintenanceExist = "maintenance.exist";
+	public static final String carMaintenanceListed = "maintenance.listed";
 	public static final String carInMaintenance  = "car.in.maintanance";
 	
 	public static final String carDamageAdded = "car.damage.added";
 	public static final String carDamageUpdated = "car.damage.updated";
 	public static final String carDamageDeleted = "car.damage.deleted";
 	public static final String carDamageExist = "car.damage.exist";
-	
+	public static final String carDamagesListed = "car.damage.listed";
+	public static final String carDamageIdNotExists = "car.damage.not.exist";
 	
 	public static final String carRented = "car.rented";
 	
@@ -65,11 +75,12 @@ public class Messages {
 	public static final String cityDeleted = "city.added";
 	public static final String cityNameExists = "city.name.exists";
 	public static final String cityExist = "city.exist";
+	public static final String cityListed = "city.listed";
 	
 	public static final String additionalServiceAdded = "additional.service.added";
 	public static final String additionalServiceUpdated = "additional.service.updated";
 	public static final String additionalServiceDeleted = "additional.service.deleted";
-	public static final String additionalServiceNotDeleted = "additional.service.not.deleted";
+	public static final String additionalServiceNotExist = "additional.service.not.exists";
 	public static final String additionalServiceExist = "additional.service.exists";
 	public static final String additionalServiceListed = "additional.service.listed";
 	
@@ -83,6 +94,13 @@ public class Messages {
 	public static final String cardUpdated = "card.updated";
 	public static final String cardDeleted= "card.deleted";
 	public static final String cardListed= "card.listed";
+	public static final String cardIdNotExists = "card.id.not.exists";
+	
+	
+	
+	
+
+
 	
 	
 	

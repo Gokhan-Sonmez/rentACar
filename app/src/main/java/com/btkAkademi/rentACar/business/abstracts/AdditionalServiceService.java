@@ -2,6 +2,7 @@ package com.btkAkademi.rentACar.business.abstracts;
 
 import java.util.List;
 
+import com.btkAkademi.rentACar.business.dtos.AdditionalServiceDto;
 import com.btkAkademi.rentACar.business.dtos.AdditionalServiceListDto;
 import com.btkAkademi.rentACar.business.requests.additionalService.CreateAdditionalServiceRequest;
 import com.btkAkademi.rentACar.business.requests.additionalService.UpdateAdditionalServiceRequest;
@@ -13,7 +14,7 @@ public interface AdditionalServiceService {
 
 
     DataResult<List<AdditionalServiceListDto>> getAll();
-
+    DataResult<AdditionalServiceDto> getById(int id);
 	
 	DataResult<AdditionalService> getByRentalId(int rentalId);
 	DataResult<List<AdditionalService>> getAllRentalId(int rentalId);

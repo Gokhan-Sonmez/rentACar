@@ -12,9 +12,10 @@ import com.btkAkademi.rentACar.business.abstracts.CarMaintenanceService;
 import com.btkAkademi.rentACar.business.abstracts.CarService;
 import com.btkAkademi.rentACar.business.abstracts.RentalService;
 import com.btkAkademi.rentACar.business.constants.Messages;
-
+import com.btkAkademi.rentACar.business.dtos.CarMaintenanceDto;
 import com.btkAkademi.rentACar.business.dtos.CarMaintenanceListDto;
 import com.btkAkademi.rentACar.business.requests.carMaintenanceRequest.CreateCarMaintenanceRequest;
+import com.btkAkademi.rentACar.business.requests.carMaintenanceRequest.UpdateCarMaintenanceRequest;
 import com.btkAkademi.rentACar.core.utilities.business.BusinessRules;
 import com.btkAkademi.rentACar.core.utilities.mapping.ModelMapperService;
 import com.btkAkademi.rentACar.core.utilities.results.DataResult;
@@ -58,7 +59,17 @@ public class CarMaintenanceManager implements CarMaintenanceService{
 				.map(carMaintanance, CarMaintenanceListDto.class))
 				.collect(Collectors.toList());
 		
-		return new SuccessDataResult<List<CarMaintenanceListDto>>(response);
+		return new SuccessDataResult<List<CarMaintenanceListDto>>(response, Messages.carMaintenanceListed);
+	}
+
+	
+	@Override
+	public DataResult<CarMaintenanceDto> getById(int id) {
+		
+		CarMaintenance carMaintenance = this.carMaintenanceDao.getById(id);
+		CarMaintenanceDto response = this.modelMapperService.forDto().map(carMaintenance, CarMaintenanceDto.class);
+		
+		return new SuccessDataResult<CarMaintenanceDto>(response, Messages.carMaintenanceListed);
 	}
 
 	@Override
@@ -66,7 +77,8 @@ public class CarMaintenanceManager implements CarMaintenanceService{
 		
 		Result result = BusinessRules.run(				
 				checkIfCarIsExists(createCarMaintenanceRequest.getCarId()),
-				checkIfCarIsRented(createCarMaintenanceRequest.getCarId())
+				checkIfCarIsRented(createCarMaintenanceRequest.getCarId()),
+				checkIfCarIsAlreadyInMaintanance(createCarMaintenanceRequest.getCarId())
 				)	;		
 		if(result!=null) {			
 			return result;
@@ -79,8 +91,53 @@ public class CarMaintenanceManager implements CarMaintenanceService{
 		return new SuccessResult(Messages.carMaintenanceAdded);
 	}
 	
+	@Override
+	public Result update(UpdateCarMaintenanceRequest updateCarMaintenanceRequest) {
+		
+		Result result = BusinessRules.run(	
+				checkIfCarMaintenanceIdExists(updateCarMaintenanceRequest.getId()),
+				checkIfCarIsExists(updateCarMaintenanceRequest.getCarId()),
+				checkIfCarIsRented(updateCarMaintenanceRequest.getCarId()),
+				checkIfCarIsAlreadyInMaintanance(updateCarMaintenanceRequest.getCarId())
+				)	;		
+		if(result!=null) {			
+			return result;
+		}
+		
+		CarMaintenance carMaintenance = this.modelMapperService.forRequest().map(updateCarMaintenanceRequest,CarMaintenance.class);
+		this.carMaintenanceDao.save(carMaintenance);
+		
+		return new SuccessResult(Messages.carMaintenanceUpdated);
+	}
+
+	@Override
+	public Result delete(int id) {
+		
+		Result result = BusinessRules.run(	
+				checkIfCarMaintenanceIdExists(id)
+				)	;		
+		if(result!=null) {			
+			return result;
+		}
+		this.carMaintenanceDao.deleteById(id);
+		
+		return new SuccessResult(Messages.carMaintenanceDeleted);
+	}
+	
+	@Override
+	public boolean isCarInMaintenance(int carId) {
+		if(carMaintenanceDao.findByCarIdAndMaintenanceEndIsNull(carId)!=null) {
+			return true;
+		}
+		else return false;
+	}
+
+	
+
+	// valid
+	
 	private Result checkIfCarIsExists(int carId) {
-		if(!carService.getByCarId(carId).isSuccess()) {
+		if(!carService.getCarById(carId).isSuccess()) {
 			return new ErrorResult(Messages.carIdNotExists);
 		}
 		else return new SuccessResult();
@@ -96,15 +153,26 @@ public class CarMaintenanceManager implements CarMaintenanceService{
 		else return new SuccessResult();
 	}
 
-	@Override
-	public boolean checkIfCarIsInMaintenance(int carId) {
-		if(carMaintenanceDao.findByCarIdAndMaintenanceEndIsNull(carId)!=null) {
-			return true;
+	private Result checkIfCarMaintenanceIdExists(int id)
+	{
+		
+		if(carMaintenanceDao.existsById(id))
+		{
+			return new ErrorResult();
 		}
-		else return false;
+		
+		return new SuccessResult();
+			
 	}
 	
 	
+	private Result checkIfCarIsAlreadyInMaintanance(int carId) {
+		if(isCarInMaintenance(carId)) {
+			return new ErrorResult(Messages.carInMaintenance);
+		}
+		else return new SuccessResult();
+	}
+
 	
 	
 

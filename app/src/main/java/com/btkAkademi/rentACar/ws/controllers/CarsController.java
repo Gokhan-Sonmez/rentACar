@@ -40,7 +40,7 @@ public class CarsController {
 	@GetMapping("get-by-id/{id}")
 	public DataResult<CarDto> getById(@PathVariable int id) {
 
-		return this.carService.getAllCarById(id);
+		return this.carService.getCarById(id);
 	}
 
 	@GetMapping("getallbypage")
