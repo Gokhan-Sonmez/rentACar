@@ -4,7 +4,9 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,18 +35,32 @@ public class BrandsController {
 		return this.brandService.getAll();
 	}
 	
+	@GetMapping("get-by-id/{id}")
+	public Result getById(@PathVariable int id) {
+		return this.brandService.getById(id);
+	}
+
+	
 	@PostMapping("add")
 	
 	public Result add(@RequestBody @Valid CreateBrandRequest createBrandRequest) {
 		
 		return this.brandService.add(createBrandRequest);
 	}
+	
    @PostMapping("update")
 	
 	public Result update(@RequestBody @Valid UpdateBrandRequest updateBrandRequest) {
 		
 		return this.brandService.update(updateBrandRequest);
 	}
+   
+   @DeleteMapping("delete/{id}")
+   
+	public Result delete(@PathVariable int id) {
+	   
+	   return this.delete(id);
+   }
 
 
 

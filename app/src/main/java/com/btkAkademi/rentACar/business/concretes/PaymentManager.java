@@ -25,10 +25,10 @@ import com.btkAkademi.rentACar.core.utilities.results.ErrorResult;
 import com.btkAkademi.rentACar.core.utilities.results.Result;
 import com.btkAkademi.rentACar.core.utilities.results.SuccessDataResult;
 import com.btkAkademi.rentACar.core.utilities.results.SuccessResult;
-import com.btkAkademi.rentACar.core.utilities.services.IsBankPosService;
+import com.btkAkademi.rentACar.core.utilities.services.FakePosSystemService;
 import com.btkAkademi.rentACar.dataAccess.abstracts.PaymentDao;
 import com.btkAkademi.rentACar.entities.concretes.AdditionalService;
-
+import com.btkAkademi.rentACar.entities.concretes.Card;
 import com.btkAkademi.rentACar.entities.concretes.Payment;
 
 
@@ -40,7 +40,7 @@ public class PaymentManager implements PaymentService{
 	private AdditionalServiceService additionalServiceService;
 	private RentalService rentalService;
 	private CarService carService;
-	private IsBankPosService isBankPosService;
+	private FakePosSystemService fakePosSystemService;
 	
 	
 	
@@ -49,8 +49,8 @@ public class PaymentManager implements PaymentService{
 			ModelMapperService modelMapperService,
 			RentalService rentalService,
 			AdditionalServiceService additionalServiceService,
-			CarService carService,
-			IsBankPosService isBankPosService
+			CarService carService
+		
 			) {
 		super();
 		this.paymentDao = paymentDao;
@@ -58,7 +58,7 @@ public class PaymentManager implements PaymentService{
 		this.additionalServiceService =additionalServiceService;
 		this.rentalService = rentalService;
 		this.carService=carService;
-		this.isBankPosService = isBankPosService;
+	
 	}
 
 	
@@ -80,13 +80,13 @@ public class PaymentManager implements PaymentService{
 	public Result add(CreatePaymentRequest createPaymentRequest) {
 		
 		
-		Result result = BusinessRules.run(
-				checkIfLimitIsEnough("1",1));
+		/*Result result = BusinessRules.run(
+				checkIfLimitIsEnough());
 		
 		if(result!=null) {
 			
 			return result;
-		}
+		}*/
 		
 		Payment payment = modelMapperService.forRequest().map(createPaymentRequest, Payment.class);
 		
@@ -133,15 +133,15 @@ public class PaymentManager implements PaymentService{
 	    }
 	
 	  
-	  private Result checkIfLimitIsEnough(String cardNo,int cvv)
+	/*  private Result checkIfCreditCardIsValid(Card card)
 	  {
-		  var result = this.isBankPosService.checkIfLimitIsEnough(cardNo, cvv);
+		  var result = this.fakePosSystemService.checkIfCreditCardIsValid(card);
 		  
-		  if(!result) {
+		  if(result.) {
 			   
 			   return new ErrorResult(Messages.cardLimitNotEnough);
 		   }
 		   return new SuccessResult();
-	  }
+	  }*/
 
 }

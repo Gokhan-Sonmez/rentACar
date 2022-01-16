@@ -103,7 +103,26 @@ public class CarManager implements CarService {
 		
 		
 		
-		return new SuccessDataResult<List<CarListDto>>(response);
+		return new SuccessDataResult<List<CarListDto>>(response,Messages.carListed);
+	}
+	
+	@Override
+	public DataResult<CarDto> getAllCarById(int carId) {
+		Car car = this.carDao.getById(carId);
+		CarDto response = modelMapperService.forDto().map(car, CarDto.class);
+
+		return new SuccessDataResult<CarDto>(response,Messages.carListed);
+	}
+
+	@Override
+	public Result delete(int id) {
+		if(carDao.existsById(id))
+		{
+			carDao.deleteById(id);
+			return new SuccessResult(Messages.carDeleted);
+		}
+			
+			return new ErrorResult(Messages.carIdNotExists);
 	}
 	
 	
@@ -116,13 +135,7 @@ public class CarManager implements CarService {
 		   return new SuccessResult();
 	}
 
-	@Override
-	public DataResult<CarDto> getAllCarById(int carId) {
-		Car car = this.carDao.findById(carId).get();
-		CarDto response = modelMapperService.forDto().map(car, CarDto.class);
 
-		return new SuccessDataResult<CarDto>(response);
-	}
 
 	
 	

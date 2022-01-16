@@ -20,7 +20,14 @@ import lombok.NoArgsConstructor;
 @Table(name="customers")
 public class Customer extends User {
 
+	
 	@JsonIgnore
 	@OneToMany(mappedBy = "customer")
 	private List<Rental> rentals;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "customer")
+	private List<Card> cards;
+	
+	
 }

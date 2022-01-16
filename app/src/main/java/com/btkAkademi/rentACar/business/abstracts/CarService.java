@@ -18,7 +18,8 @@ public interface CarService {
 	
 	DataResult<Car> getByCarId(int carId);
 	DataResult<CarDto> getAllCarById(int carId);
-	Result add(CreateCarRequest createCarRequest);
 	
+	Result add(CreateCarRequest createCarRequest);
 	Result update(UpdateCarRequest updateCarRequest);
+	Result delete (int id);
 }

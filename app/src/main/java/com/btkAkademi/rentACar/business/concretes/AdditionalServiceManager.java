@@ -10,8 +10,10 @@ import com.btkAkademi.rentACar.business.abstracts.AdditionalServiceService;
 import com.btkAkademi.rentACar.business.constants.Messages;
 import com.btkAkademi.rentACar.business.dtos.AdditionalServiceListDto;
 import com.btkAkademi.rentACar.business.requests.additionalService.CreateAdditionalServiceRequest;
+import com.btkAkademi.rentACar.business.requests.additionalService.UpdateAdditionalServiceRequest;
 import com.btkAkademi.rentACar.core.utilities.mapping.ModelMapperService;
 import com.btkAkademi.rentACar.core.utilities.results.DataResult;
+import com.btkAkademi.rentACar.core.utilities.results.ErrorResult;
 import com.btkAkademi.rentACar.core.utilities.results.Result;
 import com.btkAkademi.rentACar.core.utilities.results.SuccessDataResult;
 import com.btkAkademi.rentACar.core.utilities.results.SuccessResult;
@@ -54,6 +56,24 @@ public class AdditionalServiceManager implements AdditionalServiceService {
 		additionalServiceDao.save(additionalService);
 		return new SuccessResult(Messages.additionalServiceAdded);
 	}
+	
+	@Override
+	public Result update(UpdateAdditionalServiceRequest updateAdditionalServiceRequest) {
+       AdditionalService additionalService = modelMapperService.forRequest()
+    		   .map(updateAdditionalServiceRequest, AdditionalService.class);
+		
+		additionalServiceDao.save(additionalService);
+		return new SuccessResult(Messages.additionalServiceUpdated);
+	}
+
+	@Override
+	public Result delete(int id) {
+		if(additionalServiceDao.existsById(id)) {
+			additionalServiceDao.deleteById(id);
+			return new SuccessResult(Messages.additionalServiceDeleted);
+		}
+		else return new ErrorResult(Messages.additionalServiceNotDeleted);
+	}
 
 	@Override
 	public DataResult<AdditionalService> getByRentalId(int rentalId) {
@@ -66,5 +86,7 @@ public class AdditionalServiceManager implements AdditionalServiceService {
 		List<AdditionalService> additionalService = this.additionalServiceDao.findByRentalId(rentalId);
 		return new SuccessDataResult<List<AdditionalService>>(additionalService);
 	}
+
+
 
 }

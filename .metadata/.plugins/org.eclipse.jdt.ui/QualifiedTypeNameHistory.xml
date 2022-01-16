@@ -1,21 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="com.btkAkademi.rentACar.business.requests.carDamageRequest.CreateCarDamageRequest"/>
-    <fullyQualifiedTypeName name="lombok.Data"/>
-    <fullyQualifiedTypeName name="com.btkAkademi.rentACar.dataAccess.abstracts.CityDao"/>
-    <fullyQualifiedTypeName name="java.util.stream.Collector"/>
-    <fullyQualifiedTypeName name="com.btkAkademi.rentACar.business.dtos.CityListDto"/>
-    <fullyQualifiedTypeName name="com.btkAkademi.rentACar.business.requests.cityRequest.CreateCityRequest"/>
-    <fullyQualifiedTypeName name="com.btkAkademi.rentACar.entities.concretes.City"/>
-    <fullyQualifiedTypeName name="com.btkAkademi.rentACar.core.utilities.results.ErrorResult"/>
-    <fullyQualifiedTypeName name="com.btkAkademi.rentACar.business.abstracts.CityService"/>
-    <fullyQualifiedTypeName name="com.btkAkademi.rentACar.core.utilities.results.ErrorDataResult"/>
-    <fullyQualifiedTypeName name="org.springframework.context.annotation.Lazy"/>
-    <fullyQualifiedTypeName name="com.btkAkademi.rentACar.core.utilities.business.BusinessRules"/>
-    <fullyQualifiedTypeName name="lombok.AllArgsConstructor"/>
-    <fullyQualifiedTypeName name="lombok.NoArgsConstructor"/>
     <fullyQualifiedTypeName name="javax.persistence.OneToMany"/>
-    <fullyQualifiedTypeName name="java.lang.Integer"/>
     <fullyQualifiedTypeName name="com.btkAkademi.rentACar.dataAccess.abstracts.AdditionalServiceDao"/>
     <fullyQualifiedTypeName name="com.btkAkademi.rentACar.core.utilities.results.SuccessResult"/>
     <fullyQualifiedTypeName name="com.btkAkademi.rentACar.business.constants.Messages"/>
@@ -33,7 +18,6 @@
     <fullyQualifiedTypeName name="org.springframework.data.web.PageableDefault"/>
     <fullyQualifiedTypeName name="org.springframework.data.domain.Pageable"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestParam"/>
-    <fullyQualifiedTypeName name="org.springframework.data.jpa.repository.JpaRepository"/>
     <fullyQualifiedTypeName name="com.btkAkademi.rentACar.business.requests.paymentRequest.CreatePaymentRequest"/>
     <fullyQualifiedTypeName name="com.btkAkademi.rentACar.dataAccess.abstracts.PaymentDao"/>
     <fullyQualifiedTypeName name="com.btkAkademi.rentACar.core.utilities.mapping.ModelMapperService"/>
@@ -42,9 +26,7 @@
     <fullyQualifiedTypeName name="com.btkAkademi.rentACar.business.abstracts.PaymentService"/>
     <fullyQualifiedTypeName name="com.btkAkademi.rentACar.entities.concretes.Payment"/>
     <fullyQualifiedTypeName name="com.btkAkademi.rentACar.business.dtos.PaymentListDto"/>
-    <fullyQualifiedTypeName name="com.btkAkademi.rentACar.business.abstracts.AdditionalServiceService"/>
     <fullyQualifiedTypeName name="com.btkAkademi.rentACar.business.abstracts.RentalService"/>
-    <fullyQualifiedTypeName name="com.btkAkademi.rentACar.core.utilities.results.Result"/>
     <fullyQualifiedTypeName name="javax.persistence.ManyToOne"/>
     <fullyQualifiedTypeName name="javax.persistence.JoinColumn"/>
     <fullyQualifiedTypeName name="com.btkAkademi.rentACar.business.dtos.RentalListDto"/>
@@ -58,6 +40,24 @@
     <fullyQualifiedTypeName name="java.util.List"/>
     <fullyQualifiedTypeName name="java.time.temporal.ChronoUnit"/>
     <fullyQualifiedTypeName name="com.btkAkademi.rentACar.business.abstracts.CarService"/>
-    <fullyQualifiedTypeName name="com.btkAkademi.rentACar.business.dtos.CarDto"/>
     <fullyQualifiedTypeName name="com.btkAkademi.rentACar.core.utilities.services.IsBankPosService"/>
+    <fullyQualifiedTypeName name="com.btkAkademi.rentACar.core.utilities.services.FakePosSystemService"/>
+    <fullyQualifiedTypeName name="org.springframework.data.jpa.repository.JpaRepository"/>
+    <fullyQualifiedTypeName name="java.lang.Integer"/>
+    <fullyQualifiedTypeName name="com.btkAkademi.rentACar.entities.concretes.Card"/>
+    <fullyQualifiedTypeName name="com.btkAkademi.rentACar.business.dtos.CardListDto"/>
+    <fullyQualifiedTypeName name="com.btkAkademi.rentACar.core.utilities.results.Result"/>
+    <fullyQualifiedTypeName name="com.btkAkademi.rentACar.business.requests.cardRequest.CreateCardRequest"/>
+    <fullyQualifiedTypeName name="com.btkAkademi.rentACar.business.abstracts.CardService"/>
+    <fullyQualifiedTypeName name="lombok.NoArgsConstructor"/>
+    <fullyQualifiedTypeName name="lombok.AllArgsConstructor"/>
+    <fullyQualifiedTypeName name="lombok.Data"/>
+    <fullyQualifiedTypeName name="com.btkAkademi.rentACar.business.abstracts.AdditionalServiceService"/>
+    <fullyQualifiedTypeName name="com.btkAkademi.rentACar.core.utilities.results.ErrorResult"/>
+    <fullyQualifiedTypeName name="com.btkAkademi.rentACar.business.requests.additionalService.UpdateAdditionalServiceRequest"/>
+    <fullyQualifiedTypeName name="com.btkAkademi.rentACar.business.dtos.BrandDto"/>
+    <fullyQualifiedTypeName name="com.btkAkademi.rentACar.business.dtos.ColorDto"/>
+    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.DeleteMapping"/>
+    <fullyQualifiedTypeName name="com.btkAkademi.rentACar.business.dtos.CarDto"/>
+    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PathVariable"/>
 </qualifiedTypeNameHistroy>
