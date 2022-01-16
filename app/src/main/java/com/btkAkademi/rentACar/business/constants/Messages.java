@@ -95,6 +95,7 @@ public class Messages {
 	public static final String cardDeleted= "card.deleted";
 	public static final String cardListed= "card.listed";
 	public static final String cardIdNotExists = "card.id.not.exists";
+	public static final String limitNotEnough = "limit.not.enough";
 	
 	
 	
