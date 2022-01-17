@@ -16,4 +16,5 @@ public class CarListDto {
 	private int findexScore;
 	private int kilometer;
 	private String description;
+	private int minAge;
 }

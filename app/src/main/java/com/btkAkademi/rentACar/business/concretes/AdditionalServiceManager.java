@@ -53,6 +53,12 @@ public class AdditionalServiceManager implements AdditionalServiceService {
 		
 		return new SuccessDataResult<AdditionalServiceDto>(response,Messages.additionalServiceListed);
 	}
+	
+	@Override
+	public DataResult<List<AdditionalServiceDto>> getAllByRentalId(int rentalId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	@Override
 	public Result add(CreateAdditionalServiceRequest createAdditionalServiceRequest) {
@@ -93,17 +99,7 @@ public class AdditionalServiceManager implements AdditionalServiceService {
 
 	}
 
-	@Override
-	public DataResult<AdditionalService> getByRentalId(int rentalId) {
-		AdditionalService additionalService = this.additionalServiceDao.getById(rentalId);
-		return new SuccessDataResult<AdditionalService>(additionalService);
-	}
 
-	@Override
-	public DataResult<List<AdditionalService>> getAllRentalId(int rentalId) {
-		List<AdditionalService> additionalService = this.additionalServiceDao.findByRentalId(rentalId);
-		return new SuccessDataResult<List<AdditionalService>>(additionalService);
-	}
 
 	private Result checkIfAdditionalServiceIdExist(int id) {
 		if (!additionalServiceDao.existsById(id)) {
@@ -113,6 +109,8 @@ public class AdditionalServiceManager implements AdditionalServiceService {
 		return new SuccessResult();
 
 	}
+
+	
 
 	
 

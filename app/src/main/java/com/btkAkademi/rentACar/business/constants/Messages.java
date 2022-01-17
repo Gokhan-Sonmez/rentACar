@@ -96,7 +96,20 @@ public class Messages {
 	public static final String cardListed= "card.listed";
 	public static final String cardIdNotExists = "card.id.not.exists";
 	public static final String limitNotEnough = "limit.not.enough";
+	public static final String FindeksEnough = "findeks.enough";
+	public static final String FindeksNotEnough = "findeks.not.enough";
+	public static final String ageIsNotEnough = "age.is.not.enough";
 	
+	public static final String promoCodeListed = "promo.code.listed";
+	public static final String promoCodeAdded = "promo.code.added";
+	public static final String promoCodeUpdated = "promo.code.updated";
+	public static final String promoCodeDeleted = "promo.code.deleted";
+	
+	public static final String invoiceUpdated = "invoice.updated";
+	public static final String invoiceAdded = "invoice.added";
+	public static final String invoiceDeleted = "invoice.deleted";
+	
+	public static final String invoiceListed = "invoice.listed";
 	
 	
 	

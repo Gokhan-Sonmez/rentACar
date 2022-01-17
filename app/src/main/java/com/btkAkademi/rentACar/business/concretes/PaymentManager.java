@@ -10,10 +10,11 @@ import org.springframework.stereotype.Service;
 
 import com.btkAkademi.rentACar.business.abstracts.AdditionalServiceService;
 import com.btkAkademi.rentACar.business.abstracts.CarService;
-import com.btkAkademi.rentACar.business.abstracts.CardService;
 import com.btkAkademi.rentACar.business.abstracts.PaymentService;
+import com.btkAkademi.rentACar.business.abstracts.PromoCodeService;
 import com.btkAkademi.rentACar.business.abstracts.RentalService;
 import com.btkAkademi.rentACar.business.constants.Messages;
+import com.btkAkademi.rentACar.business.dtos.AdditionalServiceDto;
 import com.btkAkademi.rentACar.business.dtos.CarDto;
 import com.btkAkademi.rentACar.business.dtos.PaymentDto;
 import com.btkAkademi.rentACar.business.dtos.PaymentListDto;
@@ -29,7 +30,7 @@ import com.btkAkademi.rentACar.core.utilities.results.Result;
 import com.btkAkademi.rentACar.core.utilities.results.SuccessDataResult;
 import com.btkAkademi.rentACar.core.utilities.results.SuccessResult;
 import com.btkAkademi.rentACar.dataAccess.abstracts.PaymentDao;
-import com.btkAkademi.rentACar.entities.concretes.AdditionalService;
+
 import com.btkAkademi.rentACar.entities.concretes.Card;
 import com.btkAkademi.rentACar.entities.concretes.Payment;
 
@@ -42,12 +43,12 @@ public class PaymentManager implements PaymentService {
 	private RentalService rentalService;
 	private CarService carService;
 	private FakePosSystemService fakePosSystemService;
-
+	private PromoCodeService promoCodeService;
 
 	@Autowired
 	public PaymentManager(PaymentDao paymentDao, ModelMapperService modelMapperService, RentalService rentalService,
 			AdditionalServiceService additionalServiceService, CarService carService,
-			FakePosSystemService fakePosSystemService
+			FakePosSystemService fakePosSystemService, PromoCodeService promoCodeService
 
 	) {
 		super();
@@ -57,7 +58,7 @@ public class PaymentManager implements PaymentService {
 		this.rentalService = rentalService;
 		this.carService = carService;
 		this.fakePosSystemService = fakePosSystemService;
-	
+		this.promoCodeService = promoCodeService;
 
 	}
 
@@ -102,36 +103,6 @@ public class PaymentManager implements PaymentService {
 		return new SuccessResult(Messages.paymentAdded);
 	}
 
-	private Payment paymentCalculate(Payment payment, int rentalId) {
-
-		RentalDto rental = rentalService.getById(rentalId).getData();
-
-		// date difference
-		long days = ChronoUnit.DAYS.between(rental.getRentDate(), rental.getReturnDate());
-
-		// dependency
-		CarDto carDto = carService.getCarById(rental.getCarId()).getData();
-		List<AdditionalService> additionalService = additionalServiceService.getAllRentalId(rentalId).getData();
-
-		double serviceTotalPrice = 0;
-
-		for (AdditionalService additional : additionalService) {
-
-			serviceTotalPrice += additional.getPrice();
-
-		}
-
-		// calculate
-		Double total = (carDto.getDailyPrice() * days) + serviceTotalPrice;
-
-		if (!rental.getReturnDate().equals(LocalDate.now())) {
-			payment.setMoneyPaid(total);
-		}
-
-		return payment;
-
-	}
-
 	@Override
 	public Result update(UpdatePaymentRequest updatePaymentRequest) {
 		Result result = BusinessRules.run(checkIfPaymentIdExist(updatePaymentRequest.getId()));
@@ -160,6 +131,19 @@ public class PaymentManager implements PaymentService {
 
 		return new SuccessResult(Messages.paymentDeleted);
 	}
+	
+	@Override
+	public DataResult<List<PaymentListDto>> getAllByRentalId(int id) {
+		
+	
+		List<Payment> paymentList = this.paymentDao.getAllByRentalId(id); 
+		List<PaymentListDto> response = paymentList.stream()
+				.map(payment -> modelMapperService.forDto().map(payment, PaymentListDto.class))
+				.collect(Collectors.toList());
+		return new SuccessDataResult<List<PaymentListDto>>(response);
+	}
+	
+	//valid
 
 	private Result checkIfPaymentIdExist(int id) {
 		if (!paymentDao.existsById(id)) {
@@ -168,11 +152,56 @@ public class PaymentManager implements PaymentService {
 
 		return new SuccessResult();
 	}
+	
+	
 
 	private Result checkIfCreditCardIsValid(Card card) {
 		var result = this.fakePosSystemService.checkIfCreditCardIsValid(card);
 
 		return result;
 	}
+
+	private Payment paymentCalculate(Payment payment, int rentalId) {
+
+		RentalDto rental = rentalService.getById(rentalId).getData();
+
+		// date difference
+		long days = ChronoUnit.DAYS.between(rental.getRentDate(), rental.getReturnDate());
+
+	
+		CarDto carDto = carService.getCarById(rental.getCarId()).getData();
+		List<AdditionalServiceDto> additionalService = additionalServiceService.getAllByRentalId(rentalId).getData();
+
+		double serviceTotalPrice = 0;
+
+		double totalPrice = 0;
+
+		for (AdditionalServiceDto additional : additionalService) {
+
+			serviceTotalPrice += additional.getPrice();
+
+		}
+
+		totalPrice = carDto.getDailyPrice();
+
+		// discount
+		if (rental.getPromoCodeId() != 0) {
+			double discountRate = 0;
+			discountRate = promoCodeService.getById(rental.getPromoCodeId()).getData().getDiscountRate();
+			totalPrice = totalPrice - (totalPrice * discountRate);
+		}
+
+		// calculate
+		Double total = (totalPrice * days) + serviceTotalPrice;
+
+		if (!rental.getReturnDate().equals(LocalDate.now())) {
+			payment.setMoneyPaid(total);
+		}
+
+		return payment;
+
+	}
+
+	
 
 }

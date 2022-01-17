@@ -12,4 +12,5 @@ public class AdditionalServiceDto {
 	private int id;
 	private int rentalId;
 	private String name;
+	private double price;
 }

@@ -13,6 +13,7 @@ public interface PaymentService {
 	
 	DataResult<List<PaymentListDto>> getAll();
 	DataResult<PaymentDto> getById(int id);
+	DataResult<List<PaymentListDto>> getAllByRentalId(int id);
 	
 	Result add (CreatePaymentRequest createPaymentRequest);
 	Result update (UpdatePaymentRequest updatePaymentRequest);

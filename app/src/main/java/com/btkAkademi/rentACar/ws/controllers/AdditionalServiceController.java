@@ -46,7 +46,7 @@ public class AdditionalServiceController {
 	
 	@GetMapping("get-all-by-rental-id/{id}")
 	public Result getAllByRentalId(@PathVariable int id) {
-		return additionalServiceService.getAllRentalId(id);
+		return additionalServiceService.getAllByRentalId(id);
 		
 	}
 	

@@ -87,13 +87,16 @@ public class BrandManager implements BrandService {
 	@Override
 	public Result delete(int id) {
 
-		if (this.brandDao.existsById(id)) {
-			this.brandDao.deleteById(id);
-			return new SuccessResult(Messages.brandDeleted);
+		Result result = BusinessRules.run(checkIfBrandIdExists(id));
+
+		if (result != null) {
+
+			return result;
 		}
 
-		else
-			return new ErrorResult(Messages.brandNotDeleted);
+		this.brandDao.deleteById(id);
+		return new SuccessResult(Messages.brandDeleted);
+
 	}
 
 // valid

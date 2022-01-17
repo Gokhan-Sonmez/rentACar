@@ -29,4 +29,6 @@ public class RentalDto {
 	
 
 	private int returnKilometer;
+	
+	private int promoCodeId;
 }

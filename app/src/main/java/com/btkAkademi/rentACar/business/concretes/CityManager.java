@@ -14,7 +14,6 @@ import com.btkAkademi.rentACar.business.requests.cityRequest.UpdateCityRequest;
 import com.btkAkademi.rentACar.core.utilities.business.BusinessRules;
 import com.btkAkademi.rentACar.core.utilities.mapping.ModelMapperService;
 import com.btkAkademi.rentACar.core.utilities.results.DataResult;
-import com.btkAkademi.rentACar.core.utilities.results.ErrorDataResult;
 import com.btkAkademi.rentACar.core.utilities.results.ErrorResult;
 import com.btkAkademi.rentACar.core.utilities.results.Result;
 import com.btkAkademi.rentACar.core.utilities.results.SuccessDataResult;
@@ -50,7 +49,7 @@ public class CityManager implements CityService {
 		if (result != null) {
 			return result;
 		}
-		
+
 		City city = modelMapperService.forRequest().map(udpateCityRequest, City.class);
 		this.cityDao.save(city);
 		return new SuccessResult(Messages.cityUpdated);
@@ -73,17 +72,17 @@ public class CityManager implements CityService {
 		List<CityListDto> response = cityList.stream()
 				.map(city -> modelMapperService.forDto().map(city, CityListDto.class)).collect(Collectors.toList());
 
-		return new SuccessDataResult<List<CityListDto>>(response,Messages.cityListed);
+		return new SuccessDataResult<List<CityListDto>>(response, Messages.cityListed);
 	}
 
 	@Override
 	public DataResult<CityDto> getCityById(int id) {
-		
+
 		City city = this.cityDao.getById(id);
 		CityDto response = this.modelMapperService.forDto().map(city, CityDto.class);
-		
-	 return new SuccessDataResult<CityDto>(response,Messages.cityListed);
-		
+
+		return new SuccessDataResult<CityDto>(response, Messages.cityListed);
+
 	}
 
 	private Result checkIfCityNameExists(String name) {

@@ -1,9 +1,0 @@
-import org.springframework.data.jpa.repository.JpaRepository;
-
-import com.btkAkademi.rentACar.entities.concretes.Car;
-
-spackage com.btkAkademi.rentACar.dataAccess.abstracts;
-
-public interface CarDao  extends JpaRepository<Car, Integer>{
-
-}

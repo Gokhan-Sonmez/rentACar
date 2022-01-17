@@ -16,8 +16,8 @@ public interface AdditionalServiceService {
     DataResult<List<AdditionalServiceListDto>> getAll();
     DataResult<AdditionalServiceDto> getById(int id);
 	
-	DataResult<AdditionalService> getByRentalId(int rentalId);
-	DataResult<List<AdditionalService>> getAllRentalId(int rentalId);
+    DataResult<List<AdditionalServiceDto>> getAllByRentalId(int rentalId);
+
 	
 	Result add(CreateAdditionalServiceRequest createAdditionalServiceRequest);
 	Result update(UpdateAdditionalServiceRequest updateAdditionalServiceRequest);

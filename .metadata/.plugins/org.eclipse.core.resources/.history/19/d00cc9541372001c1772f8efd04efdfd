@@ -1,9 +1,0 @@
-package com.btkAkademi.rentACar.business.dtos;
-
-import javax.persistence.Column;
-
-public class BrandListDto {
-
-	private int id;
-	private String name;
-}

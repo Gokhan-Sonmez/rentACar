@@ -17,6 +17,8 @@ public class RentalListDto {
     private int customerId;
     
 	private int carId;
+	
+	private int promoCodeId;
 
 	private LocalDate rentDate;
 	
@@ -28,4 +30,6 @@ public class RentalListDto {
 	
 
 	private int returnKilometer;
+	
+	
 }

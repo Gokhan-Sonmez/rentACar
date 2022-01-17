@@ -1,8 +1,0 @@
-package com.btkAkademi.rentACar.business.abstracts;
-
-import java.util.List;
-
-public interface BrandService {
-
-	List<Brand> getAll();
-}

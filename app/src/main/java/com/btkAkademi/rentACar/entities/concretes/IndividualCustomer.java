@@ -26,4 +26,7 @@ public class IndividualCustomer extends Customer{
 	    
 	    @Column(name="birth_date")
 		private LocalDate birthDate;
+	    
+	    @Column(name="national_number")
+		private String nationalNumber;
 }

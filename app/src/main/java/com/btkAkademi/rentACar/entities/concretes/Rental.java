@@ -63,5 +63,8 @@ public class Rental {
 	
 	@OneToMany(mappedBy="rental")
 	private List<Payment> payments;
+	
+	@OneToMany(mappedBy="rental")
+	private List<PromoCode> promoCode;
 
 }

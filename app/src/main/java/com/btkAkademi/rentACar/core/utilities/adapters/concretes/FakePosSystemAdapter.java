@@ -2,6 +2,8 @@ package com.btkAkademi.rentACar.core.utilities.adapters.concretes;
 
 
 
+import org.springframework.stereotype.Service;
+
 import com.btkAkademi.rentACar.business.constants.Messages;
 import com.btkAkademi.rentACar.core.utilities.adapters.abstracts.FakePosSystemService;
 import com.btkAkademi.rentACar.core.utilities.results.ErrorResult;
@@ -10,6 +12,7 @@ import com.btkAkademi.rentACar.core.utilities.results.SuccessResult;
 import com.btkAkademi.rentACar.core.utilities.services.IsBank;
 import com.btkAkademi.rentACar.entities.concretes.Card;
 
+@Service
 public class FakePosSystemAdapter implements FakePosSystemService {
 
 	@Override

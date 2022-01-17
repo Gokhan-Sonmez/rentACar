@@ -29,22 +29,42 @@ public class RentalController {
 		this.rentalService = rentalService;
 	}
 
-	@PostMapping("add")
+	//IndividiualCustomer
+	@PostMapping("addforindividiualcustomer")
 
-	public Result add(@RequestBody CreateRentalRequest createRentalRequest) {
-		return this.rentalService.add(createRentalRequest);
+	public Result addForIndividiualCustomer(@RequestBody CreateRentalRequest createRentalRequest) {
+		return this.rentalService.addForIndividiualCustomer(createRentalRequest);
 	}
 
-	@PostMapping("update")
+	@PostMapping("updateforindividiualcustomer")
 
-	public Result update(@RequestBody UpdateRentalRequest updateRentalRequest) {
-		return this.rentalService.update(updateRentalRequest);
+	public Result updateForIndividiualCustomer(@RequestBody UpdateRentalRequest updateRentalRequest) {
+		return this.rentalService.updateForIndividiualCustomer(updateRentalRequest);
 	}
 
-	@DeleteMapping("delete/{id}")
+	@DeleteMapping("deleteforindividiualcustomer/{id}")
 
 	public Result delete(@PathVariable int id) {
-		return this.rentalService.delete(id);
+		return this.rentalService.deleteForIndividiualCustomer(id);
+	}
+	
+	//CorparateCustomer
+	@PostMapping("addforcorparatecustomer")
+
+	public Result addForCorparateCustomer(@RequestBody CreateRentalRequest createRentalRequest) {
+		return this.rentalService.addForCorparateCustomer(createRentalRequest);
+	}
+
+	@PostMapping("updateforcorparatecustomer")
+
+	public Result updateForCorparateCustomer(@RequestBody UpdateRentalRequest updateRentalRequest) {
+		return this.rentalService.updateForCorparateCustomer(updateRentalRequest);
+	}
+
+	@DeleteMapping("deleteforcorparatecustomer/{id}")
+
+	public Result deleteForCorparateCustomer(@PathVariable int id) {
+		return this.rentalService.deleteForCorparateCustomer(id);
 	}
 
 	@GetMapping("getall")
