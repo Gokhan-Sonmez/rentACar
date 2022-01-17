@@ -14,7 +14,7 @@ import com.btkAkademi.rentACar.business.abstracts.PaymentService;
 import com.btkAkademi.rentACar.business.abstracts.RentalService;
 import com.btkAkademi.rentACar.business.constants.Messages;
 import com.btkAkademi.rentACar.business.dtos.AdditionalServiceDto;
-
+import com.btkAkademi.rentACar.business.dtos.CorparateCustomerDto;
 import com.btkAkademi.rentACar.business.dtos.IndividualCustomerDto;
 
 import com.btkAkademi.rentACar.business.dtos.InvoiceCorporateCustomerDto;
@@ -48,10 +48,8 @@ public class InvoiceManager implements InvoiceService {
 	private AdditionalServiceService additionalServiceService;
 
 	@Autowired
-	public InvoiceManager(InvoiceDao invoiceDao,
-			ModelMapperService modelMapperService,
-			IndividualCustomerService individualCustomerService,
-			CorparateCustomerService corporateCustomerService,
+	public InvoiceManager(InvoiceDao invoiceDao, ModelMapperService modelMapperService,
+			IndividualCustomerService individualCustomerService, CorparateCustomerService corporateCustomerService,
 			RentalService rentalService, PaymentService paymentService,
 			AdditionalServiceService additionalServiceService) {
 		super();
@@ -65,16 +63,13 @@ public class InvoiceManager implements InvoiceService {
 		this.additionalServiceService = additionalServiceService;
 	}
 
-
-
 	@Override
 	public DataResult<InvoiceIndividualCustomerDto> getInvoiceForIndividualCustomer(int rentalId) {
-		
-		Invoice invoice = invoiceDao.findByRentalId(rentalId);
+
+		Invoice invoice = invoiceDao.getByRentalId(rentalId);
 		RentalDto rental = rentalService.getById(rentalId).getData();
 		IndividualCustomerDto customer = individualCustomerService.getById(rental.getCustomerId()).getData();
-		List<AdditionalServiceDto> additionalServices = additionalServiceService.getAllByRentalId(rentalId)
-				.getData();
+		List<AdditionalServiceDto> additionalServices = additionalServiceService.getAllByRentalId(rentalId).getData();
 		List<PaymentListDto> payments = paymentService.getAllByRentalId(rentalId).getData();
 		double totalPrice = 0;
 		for (PaymentListDto payment : payments) {
@@ -85,20 +80,32 @@ public class InvoiceManager implements InvoiceService {
 				.firstName(customer.getFirstName()).lastName(customer.getLastName())
 				.nationalityId(customer.getNationalityId()).email(customer.getEmail()).amount(totalPrice)
 				.rentDate(rental.getRentDate()).returnedDate(rental.getReturnDate())
-				.creationDate(invoice.getCreatedDate())
-						.additonalServices(additionalServices).build();
+				.creationDate(invoice.getCreatedDate()).additonalServices(additionalServices).build();
 		return new SuccessDataResult<InvoiceIndividualCustomerDto>(responseCustomerDto);
 	}
 
 	@Override
 	public DataResult<InvoiceCorporateCustomerDto> getInvoiceForCorporateCustomer(int rentalId) {
-		// TODO Auto-generated method stub
-		return null;
+		Invoice invoice = invoiceDao.getByRentalId(rentalId);
+		RentalDto rental = rentalService.getById(rentalId).getData();
+		CorparateCustomerDto customer = corparateCustomerService.getById(rental.getCustomerId()).getData();
+		List<AdditionalServiceDto> additionalServices = additionalServiceService.getAllByRentalId(rentalId).getData();
+		List<PaymentListDto> payments = paymentService.getAllByRentalId(rentalId).getData();
+		double totalPrice = 0;
+		for (PaymentListDto payment : payments) {
+			totalPrice += payment.getMoneyPaid();
+		}
+
+		InvoiceCorporateCustomerDto responseCustomerDto = InvoiceCorporateCustomerDto.builder().id(invoice.getId())
+				.companyName(customer.getCompanyName()).taxNumber(customer.getTaxtNumber()).email(customer.getEmail())
+				.amount(totalPrice).rentDate(rental.getRentDate()).returnedDate(rental.getReturnDate())
+				.creationDate(invoice.getCreatedDate()).additonalServices(additionalServices).build();
+		return new SuccessDataResult<InvoiceCorporateCustomerDto>(responseCustomerDto);
 	}
 
 	@Override
 	public Result add(CreateInvoiceRequest createInvoiceRequest) {
-		
+
 		Invoice invoice = this.modelMapperService.forRequest().map(createInvoiceRequest, Invoice.class);
 
 		this.invoiceDao.save(invoice);
@@ -113,7 +120,7 @@ public class InvoiceManager implements InvoiceService {
 		if (result != null) {
 			return result;
 		}
-		
+
 		Invoice invoice = this.modelMapperService.forRequest().map(updateInvoiceRequest, Invoice.class);
 
 		this.invoiceDao.save(invoice);
@@ -131,14 +138,14 @@ public class InvoiceManager implements InvoiceService {
 		this.invoiceDao.deleteById(id);
 		return new SuccessResult(Messages.invoiceDeleted);
 	}
-	
+
 	@Override
 	public DataResult<List<InvoiceListDto>> getAll() {
 		List<Invoice> invoiceList = this.invoiceDao.findAll();
 		List<InvoiceListDto> response = invoiceList.stream()
 				.map(invoice -> this.modelMapperService.forDto().map(invoiceList, InvoiceListDto.class))
 				.collect(Collectors.toList());
-		return new SuccessDataResult<List<InvoiceListDto>>(response,Messages.invoiceListed);
+		return new SuccessDataResult<List<InvoiceListDto>>(response, Messages.invoiceListed);
 	}
 
 	@Override
@@ -146,7 +153,7 @@ public class InvoiceManager implements InvoiceService {
 		Invoice invoice = this.invoiceDao.getById(id);
 		InvoiceDto response = this.modelMapperService.forDto().map(invoice, InvoiceDto.class);
 
-		return new SuccessDataResult<InvoiceDto>(response,Messages.invoiceListed);
+		return new SuccessDataResult<InvoiceDto>(response, Messages.invoiceListed);
 
 	}
 

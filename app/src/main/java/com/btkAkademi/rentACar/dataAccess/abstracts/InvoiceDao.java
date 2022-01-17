@@ -6,6 +6,6 @@ import com.btkAkademi.rentACar.entities.concretes.Invoice;
 
 public interface InvoiceDao  extends JpaRepository<Invoice, Integer>{
 	
-	Invoice findByRentalId(int rentalId);
+	Invoice getByRentalId(int rentalId);
 
 }
