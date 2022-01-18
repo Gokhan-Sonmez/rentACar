@@ -16,6 +16,7 @@ import com.btkAkademi.rentACar.business.abstracts.CustomerService;
 import com.btkAkademi.rentACar.business.abstracts.IndividualCustomerService;
 import com.btkAkademi.rentACar.business.abstracts.RentalService;
 import com.btkAkademi.rentACar.business.constants.Messages;
+import com.btkAkademi.rentACar.business.dtos.CarDto;
 import com.btkAkademi.rentACar.business.dtos.RentalDto;
 import com.btkAkademi.rentACar.business.dtos.RentalListDto;
 import com.btkAkademi.rentACar.business.requests.RentalRequest.CreateRentalRequest;
@@ -29,6 +30,7 @@ import com.btkAkademi.rentACar.core.utilities.results.Result;
 import com.btkAkademi.rentACar.core.utilities.results.SuccessDataResult;
 import com.btkAkademi.rentACar.core.utilities.results.SuccessResult;
 import com.btkAkademi.rentACar.dataAccess.abstracts.RentalDao;
+import com.btkAkademi.rentACar.entities.concretes.Car;
 import com.btkAkademi.rentACar.entities.concretes.Rental;
 
 @Service
@@ -313,6 +315,18 @@ public class RentalManager implements RentalService {
 		}
 		return new SuccessResult();
 
+	}
+	
+	private Result checkIfCarClassExist(String carClass)
+	{
+		
+		DataResult<CarDto> car = this.carService.getCarByCarClass(carClass);
+		
+		   if(car!= null) {
+			   
+			   return new ErrorResult(Messages.carClassExists);
+		   }
+		   return new SuccessResult();
 	}
 
 }

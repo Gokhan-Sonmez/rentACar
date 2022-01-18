@@ -125,6 +125,24 @@ public class CarManager implements CarService {
 		   }
 		   return new SuccessResult();
 	}
+	
+	private Result checkIfCarClassExist(String carClass)
+	{
+		
+		Car car = this.carDao.getByCarClass(carClass);
+		
+		   if(car!= null) {
+			   
+			   return new ErrorResult(Messages.carClassExists);
+		   }
+		   return new SuccessResult();
+	}
+
+	@Override
+	public DataResult<CarDto> getCarByCarClass(String carClass) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 
 

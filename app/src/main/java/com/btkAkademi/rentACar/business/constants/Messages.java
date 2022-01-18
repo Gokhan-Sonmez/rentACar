@@ -110,7 +110,11 @@ public class Messages {
 	public static final String invoiceDeleted = "invoice.deleted";
 	
 	public static final String invoiceListed = "invoice.listed";
-	
+	public static final String carClassExists = "car.class.exist";
+	public static final String carClassAdded = "car.class.added";
+	public static final String carClassUpdated = "car.class.updated";
+	public static final String carClassDeleted = "car.class.deleted";
+	public static final String carClassListed = "car.class.listed";
 	
 	
 

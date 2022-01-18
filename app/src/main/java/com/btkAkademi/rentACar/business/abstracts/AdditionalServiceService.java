@@ -8,7 +8,7 @@ import com.btkAkademi.rentACar.business.requests.additionalService.CreateAdditio
 import com.btkAkademi.rentACar.business.requests.additionalService.UpdateAdditionalServiceRequest;
 import com.btkAkademi.rentACar.core.utilities.results.DataResult;
 import com.btkAkademi.rentACar.core.utilities.results.Result;
-import com.btkAkademi.rentACar.entities.concretes.AdditionalService;
+
 
 public interface AdditionalServiceService {
 

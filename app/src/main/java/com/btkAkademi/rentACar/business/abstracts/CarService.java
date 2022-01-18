@@ -17,6 +17,15 @@ public interface CarService {
 	DataResult<List<CarListDto>> getAll(int pageNo,int pageSize);
 	
 	DataResult<CarDto> getCarById(int carId);
+	DataResult<CarDto> getCarByCarClass(String carClass);
+	
+	
+/*	
+    DataResult<List<CarListDto>> getAllByCarClassId(int carClassId);
+	
+	DataResult<List<Integer>> getAvailableCarsByCarClassId(int carClassId);
+	
+	*/
 	
 	Result add(CreateCarRequest createCarRequest);
 	Result update(UpdateCarRequest updateCarRequest);

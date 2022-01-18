@@ -1,9 +1,0 @@
-package com.btkAkademi.rentACar.core.utilities.mapping;
-
-import org.modelmapper.ModelMapper;
-
-public interface ModelMapperServices {
-
-	ModelMapper forDto();
-	ModelMapper forRequest();
-}

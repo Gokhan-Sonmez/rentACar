@@ -17,4 +17,5 @@ public class CarDto {
 		private int kilometer;
 		private String description;
 		private int minAge;
+		private int carClassId;
 }
