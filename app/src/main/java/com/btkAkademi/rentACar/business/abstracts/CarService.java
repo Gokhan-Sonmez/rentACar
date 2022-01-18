@@ -8,6 +8,7 @@ import com.btkAkademi.rentACar.business.requests.carRequest.CreateCarRequest;
 import com.btkAkademi.rentACar.business.requests.carRequest.UpdateCarRequest;
 import com.btkAkademi.rentACar.core.utilities.results.DataResult;
 import com.btkAkademi.rentACar.core.utilities.results.Result;
+import com.btkAkademi.rentACar.entities.concretes.Car;
 
 
 public interface CarService {
@@ -19,13 +20,10 @@ public interface CarService {
 	DataResult<CarDto> getCarById(int carId);
 	DataResult<CarDto> getCarByCarClass(String carClass);
 	
+
+	DataResult<Car> getAvailableCarsByCarClassId(int carClassId);
 	
-/*	
-    DataResult<List<CarListDto>> getAllByCarClassId(int carClassId);
 	
-	DataResult<List<Integer>> getAvailableCarsByCarClassId(int carClassId);
-	
-	*/
 	
 	Result add(CreateCarRequest createCarRequest);
 	Result update(UpdateCarRequest updateCarRequest);

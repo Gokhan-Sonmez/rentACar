@@ -19,6 +19,7 @@ import com.btkAkademi.rentACar.business.requests.carRequest.UpdateCarRequest;
 import com.btkAkademi.rentACar.core.utilities.business.BusinessRules;
 import com.btkAkademi.rentACar.core.utilities.mapping.ModelMapperService;
 import com.btkAkademi.rentACar.core.utilities.results.DataResult;
+import com.btkAkademi.rentACar.core.utilities.results.ErrorDataResult;
 import com.btkAkademi.rentACar.core.utilities.results.ErrorResult;
 import com.btkAkademi.rentACar.core.utilities.results.Result;
 import com.btkAkademi.rentACar.core.utilities.results.SuccessDataResult;
@@ -117,6 +118,24 @@ public class CarManager implements CarService {
 	}
 	
 	
+	@Override
+	public DataResult<CarDto> getCarByCarClass(String carClass) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public DataResult<Car> getAvailableCarsByCarClassId(int carClassId) {
+		var newCar = this.carDao.getAvailableCarByCarClassId(carClassId);
+		if(newCar.isEmpty() ) {
+			return new ErrorDataResult<Car>();
+		}
+		
+		var car = this.carDao.getById( newCar.get(carClassId) );
+		return new SuccessDataResult<Car>(car);
+	}
+	
+	
 	private Result checkIfCarIdExists(int id)
 	{
 		   if(this.carDao.existsById(id)) {
@@ -126,7 +145,7 @@ public class CarManager implements CarService {
 		   return new SuccessResult();
 	}
 	
-	private Result checkIfCarClassExist(String carClass)
+/*	private Result checkIfCarClassExist(String carClass)
 	{
 		
 		Car car = this.carDao.getByCarClass(carClass);
@@ -136,13 +155,9 @@ public class CarManager implements CarService {
 			   return new ErrorResult(Messages.carClassExists);
 		   }
 		   return new SuccessResult();
-	}
+	}*/
 
-	@Override
-	public DataResult<CarDto> getCarByCarClass(String carClass) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 
 
 
