@@ -1,9 +1,0 @@
-package com.btkAkademi.rentACar.business.requests.carRequest;
-
-public class CreateCarRequest {
-
-	private int brand_id;
-	private int color_id;
-	private double daily_price;
-	private String description;
-}

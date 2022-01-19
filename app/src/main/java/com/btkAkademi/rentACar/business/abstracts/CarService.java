@@ -18,8 +18,13 @@ public interface CarService {
 	DataResult<List<CarListDto>> getAll(int pageNo,int pageSize);
 	
 	DataResult<CarDto> getCarById(int carId);
-	DataResult<CarDto> getCarByCarClass(String carClass);
 	
+
+	DataResult<List<CarListDto>> getCarByColorId(int colorId);
+	DataResult<List<CarListDto>> getCarByBrandId(int brandId);
+	
+	
+
 
 	DataResult<Car> getAvailableCarsByCarClassId(int carClassId);
 	

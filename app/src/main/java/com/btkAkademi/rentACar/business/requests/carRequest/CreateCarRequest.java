@@ -11,6 +11,7 @@ public class CreateCarRequest {
 	private int brandId;
 	private int colorId;
 	private int carClassId;
+	private String carName;
 	private double dailyPrice;
 	private int modelYear;
 	private int findexScore;

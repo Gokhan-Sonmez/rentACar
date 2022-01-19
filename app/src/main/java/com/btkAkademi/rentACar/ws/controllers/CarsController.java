@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,6 +24,7 @@ import com.btkAkademi.rentACar.core.utilities.results.Result;
 
 @RestController
 @RequestMapping("/api/cars")
+@CrossOrigin
 public class CarsController {
 	private CarService carService;
 
@@ -37,10 +39,21 @@ public class CarsController {
 		return this.carService.getAll();
 	}
 
-	@GetMapping("get-by-id/{id}")
-	public DataResult<CarDto> getById(@PathVariable int id) {
+	@GetMapping("getById")
+	public DataResult<CarDto> getById(int carId) {
 
-		return this.carService.getCarById(id);
+		return this.carService.getCarById(carId);
+	}
+	
+	@GetMapping("getCarByBrandId")
+	public DataResult<List<CarListDto>> getCarByBrandId(int brandId) {
+
+		return this.carService.getCarByBrandId(brandId);
+	}
+	
+	@GetMapping("getCarByColorId")
+	public DataResult<List<CarListDto>> getCarByColorId(int colorId) {
+		return this.carService.getCarByColorId(colorId);
 	}
 
 	@GetMapping("getallbypage")

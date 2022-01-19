@@ -2,6 +2,7 @@ package com.btkAkademi.rentACar.ws.controllers;
 
 import java.util.List;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,6 +19,7 @@ import com.btkAkademi.rentACar.core.utilities.results.Result;
 
 @RestController
 @RequestMapping("/api/promocodes")
+@CrossOrigin
 public class PromoCodeController {
 	
 	private PromoCodeService promoCodeService;
