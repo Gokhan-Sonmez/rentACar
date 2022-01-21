@@ -46,20 +46,20 @@ public class CardController {
 
 	@PostMapping("add")
 	public Result add(@RequestBody CreateCardRequest createCardRequest) {
-		return this.add(createCardRequest);
+		return this.cardService.add(createCardRequest);
 	}
 
 	@PostMapping("update")
 	public Result update(@RequestBody UpdateCardRequest updateCardRequest) {
 		
-		return this.update(updateCardRequest);
+		return this.cardService.update(updateCardRequest);
 		
 	}
 	
 	@DeleteMapping("delete/{id}")
 	public Result delete(@PathVariable int id)
 	{
-		return this.delete(id);
+		return this.cardService.delete(id);
 	}
 
 }

@@ -12,6 +12,5 @@ import lombok.NoArgsConstructor;
 public class CarClassListDto {
 
 	private int id;
-	private int carId;
 	private String carClass;
 }

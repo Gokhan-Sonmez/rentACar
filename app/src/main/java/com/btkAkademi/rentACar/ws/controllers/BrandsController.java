@@ -61,7 +61,7 @@ public class BrandsController {
    
 	public Result delete(@PathVariable int id) {
 	   
-	   return this.delete(id);
+	   return this.brandService.delete(id);
    }
 
 

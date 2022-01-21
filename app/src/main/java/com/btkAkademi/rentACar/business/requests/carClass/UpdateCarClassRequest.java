@@ -13,5 +13,5 @@ public class UpdateCarClassRequest {
 
 	private int id;
 	private int carId;
-	private String description;
+	private String carClass;
 }

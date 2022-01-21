@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="com.btkAkademi.rentACar.business.dtos.PromoCodeDto"/>
     <fullyQualifiedTypeName name="com.btkAkademi.rentACar.dataAccess.abstracts.PromoCodeDao"/>
-    <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
     <fullyQualifiedTypeName name="com.btkAkademi.rentACar.entities.concretes.PromoCode"/>
     <fullyQualifiedTypeName name="com.btkAkademi.rentACar.business.abstracts.PromoCodeService"/>
     <fullyQualifiedTypeName name="com.btkAkademi.rentACar.business.requests.promoCodeRequest.CreatePromoCodeRequest"/>
@@ -45,7 +43,6 @@
     <fullyQualifiedTypeName name="com.btkAkademi.rentACar.business.abstracts.CarClassService"/>
     <fullyQualifiedTypeName name="com.btkAkademi.rentACar.business.requests.carClass.UpdateCarClassRequest"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.GetMapping"/>
-    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PostMapping"/>
     <fullyQualifiedTypeName name="com.btkAkademi.rentACar.core.utilities.results.Result"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PathVariable"/>
     <fullyQualifiedTypeName name="javax.validation.Valid"/>
@@ -60,4 +57,7 @@
     <fullyQualifiedTypeName name="com.btkAkademi.rentACar.core.utilities.results.ErrorDataResult"/>
     <fullyQualifiedTypeName name="com.btkAkademi.rentACar.core.utilities.results.SuccessDataResult"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.CrossOrigin"/>
+    <fullyQualifiedTypeName name="com.btkAkademi.rentACar.business.dtos.CarListDto"/>
+    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PostMapping"/>
+    <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
 </qualifiedTypeNameHistroy>

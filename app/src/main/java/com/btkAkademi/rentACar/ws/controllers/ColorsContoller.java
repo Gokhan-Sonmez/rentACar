@@ -55,7 +55,7 @@ public class ColorsContoller {
 
 	public Result delete(@PathVariable int id) {
 
-		return this.delete(id);
+		return this.colorService.delete(id);
 	}
 
 }

@@ -36,7 +36,8 @@ public class CarClassManager implements CarClassService {
 	public DataResult<List<CarClassListDto>> getAll() {
 		
 		List<CarClass> carClassList = this.carClassDao.findAll();
-		List<CarClassListDto> response = carClassList.stream().map(carClass -> this.modelMapperService.forDto().map(carClassList, CarClassListDto.class)).collect(Collectors.toList());
+		System.out.println(carClassList.get(0).getId());
+		List<CarClassListDto> response = carClassList.stream().map(carClass -> this.modelMapperService.forDto().map(carClass, CarClassListDto.class)).collect(Collectors.toList());
 		
 		return new SuccessDataResult<List<CarClassListDto>>(response);
 	}

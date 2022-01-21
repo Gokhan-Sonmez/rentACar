@@ -1,8 +1,0 @@
-package com.btkAkademi.rentACar.entities.concretes;
-
-public class City {
-	
-	private int id;
-	private String name; 
-
-}

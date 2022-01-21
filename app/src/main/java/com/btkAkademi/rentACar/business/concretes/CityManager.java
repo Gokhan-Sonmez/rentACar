@@ -3,6 +3,7 @@ package com.btkAkademi.rentACar.business.concretes;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.btkAkademi.rentACar.business.abstracts.CityService;
@@ -26,6 +27,14 @@ public class CityManager implements CityService {
 
 	private CityDao cityDao;
 	private ModelMapperService modelMapperService;
+
+	
+	@Autowired
+	public CityManager(CityDao cityDao, ModelMapperService modelMapperService) {
+		super();
+		this.cityDao = cityDao;
+		this.modelMapperService = modelMapperService;
+	}
 
 	@Override
 	public Result add(CreateCityRequest createCityRequest) {

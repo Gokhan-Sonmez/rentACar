@@ -1,7 +1,0 @@
-package com.btkAkademi.rentACar.dataAccess.abstracts;
-
-import org.springframework.data.jpa.repository.JpaRepository;
-
-public interface CarMaintenanceDao extends JpaRepository<CarMaintenanceDao, Integer> {
-
-}
