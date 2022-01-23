@@ -46,8 +46,6 @@
     <fullyQualifiedTypeName name="com.btkAkademi.rentACar.core.utilities.results.DataResult"/>
     <fullyQualifiedTypeName name="com.btkAkademi.rentACar.business.dtos.AdditionalServiceItemDto"/>
     <fullyQualifiedTypeName name="com.btkAkademi.rentACar.business.dtos.AdditionalServiceListDto"/>
-    <fullyQualifiedTypeName name="com.btkAkademi.rentACar.business.dtos.AdditionalServiceItemListDto"/>
-    <fullyQualifiedTypeName name="com.btkAkademi.rentACar.business.abstracts.AdditionalServiceItemService"/>
     <fullyQualifiedTypeName name="com.btkAkademi.rentACar.dataAccess.abstracts.AdditionalServiceItemDao"/>
     <fullyQualifiedTypeName name="com.btkAkademi.rentACar.core.utilities.mapping.ModelMapperService"/>
     <fullyQualifiedTypeName name="java.util.ArrayList"/>
@@ -60,4 +58,6 @@
     <fullyQualifiedTypeName name="java.util.stream.Collectors"/>
     <fullyQualifiedTypeName name="com.btkAkademi.rentACar.core.utilities.results.SuccessDataResult"/>
     <fullyQualifiedTypeName name="com.btkAkademi.rentACar.entities.concretes.City"/>
+    <fullyQualifiedTypeName name="com.btkAkademi.rentACar.business.abstracts.AdditionalServiceItemService"/>
+    <fullyQualifiedTypeName name="com.btkAkademi.rentACar.business.dtos.AdditionalServiceItemListDto"/>
 </qualifiedTypeNameHistroy>
