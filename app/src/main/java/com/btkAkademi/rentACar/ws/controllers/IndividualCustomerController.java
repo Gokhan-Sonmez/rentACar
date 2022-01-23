@@ -60,11 +60,11 @@ public class IndividualCustomerController {
 		return this.individualCustomerService.getAll();
 	}
 
-	@GetMapping("get-by-id/{id}")
+	@GetMapping("getById/{individualCustomerId}")
 
-	public DataResult<IndividualCustomerDto> getById(int id) {
+	public DataResult<IndividualCustomerDto> getById(int individualCustomerId) {
 
-		return this.individualCustomerService.getById(id);
+		return this.individualCustomerService.getById(individualCustomerId);
 	}
 
 }

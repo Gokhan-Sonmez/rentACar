@@ -11,6 +11,5 @@ import lombok.NoArgsConstructor;
 public class CreateAdditionalServiceRequest {
 
 	private int rentalId;
-	private String name;
-	private int price;
+	private int additionalServiceItemId;
 }

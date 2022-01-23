@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 public class IndividualCustomerDto {
 
 	private int id;
-	private String nationalityId;
+	private String nationalNumber;
 	private String email;
 	private String firstName;
 	private String lastName;

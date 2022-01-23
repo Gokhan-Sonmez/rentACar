@@ -74,8 +74,7 @@ public class RentalManager implements RentalService {
 				checkIfIsCarAlreadyRented(createRentalRequest.getCarId()),
 				checkIfCustomerAgeIsEnough(createRentalRequest.getCustomerId(), createRentalRequest.getCarId()),
 				checkIfIndividualCustomerHasEnoughCreditScore(
-						individualCustomerService.getById(createRentalRequest.getCustomerId()).getData()
-								.getNationalityId(),
+						individualCustomerService.getById(createRentalRequest.getCustomerId()).getData().getNationalNumber(),
 						carService.getCarById(createRentalRequest.getCarId()).getData().getFindexScore()));
 
 		if (result != null) {

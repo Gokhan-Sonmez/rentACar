@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import com.btkAkademi.rentACar.business.dtos.CarListDto;
+
 import com.btkAkademi.rentACar.entities.concretes.Car;
 
 public interface CarDao extends JpaRepository<Car, Integer> {
@@ -20,6 +20,7 @@ public interface CarDao extends JpaRepository<Car, Integer> {
 
 	List<Car> getByCarClassId(int id);
 
+	List<Car> getByCity_IdAndBrand_Id(int cityId,int brandId);
 
 
 	@Query(value = "select \r\n" + "	c.id \r\n" + "from cars c\r\n"

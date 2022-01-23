@@ -38,8 +38,8 @@ public class AdditionalServiceManager implements AdditionalServiceService {
 	@Override
 	public DataResult<List<AdditionalServiceListDto>> getAll() {
 
-		List<AdditionalService> AdditionalServiceList = additionalServiceDao.findAll();
-		List<AdditionalServiceListDto> response = AdditionalServiceList.stream().map(
+		List<AdditionalService> additionalServiceList = additionalServiceDao.findAll();
+		List<AdditionalServiceListDto> response = additionalServiceList.stream().map(
 				additionalServer -> modelMapperService.forDto().map(additionalServer, AdditionalServiceListDto.class))
 				.collect(Collectors.toList());
 
@@ -55,9 +55,14 @@ public class AdditionalServiceManager implements AdditionalServiceService {
 	}
 	
 	@Override
-	public DataResult<List<AdditionalServiceDto>> getAllByRentalId(int rentalId) {
-		// TODO Auto-generated method stub
-		return null;
+	public DataResult<List<AdditionalServiceListDto>> getAllByRentalId(int rentalId) {
+		List<AdditionalService> additionalServiceList = this.additionalServiceDao.getByRentalId(rentalId);
+		List<AdditionalServiceListDto> response = additionalServiceList.stream().map(
+				additionalServer -> modelMapperService.forDto().map(additionalServer, AdditionalServiceListDto.class))
+				.collect(Collectors.toList());
+
+		return new SuccessDataResult<List<AdditionalServiceListDto>>(response,Messages.additionalServiceListed);
+		
 	}
 
 	@Override

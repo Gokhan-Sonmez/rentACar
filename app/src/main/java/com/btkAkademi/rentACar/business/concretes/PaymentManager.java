@@ -8,13 +8,14 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.btkAkademi.rentACar.business.abstracts.AdditionalServiceItemService;
 import com.btkAkademi.rentACar.business.abstracts.AdditionalServiceService;
 import com.btkAkademi.rentACar.business.abstracts.CarService;
 import com.btkAkademi.rentACar.business.abstracts.PaymentService;
 import com.btkAkademi.rentACar.business.abstracts.PromoCodeService;
 import com.btkAkademi.rentACar.business.abstracts.RentalService;
 import com.btkAkademi.rentACar.business.constants.Messages;
-import com.btkAkademi.rentACar.business.dtos.AdditionalServiceDto;
+import com.btkAkademi.rentACar.business.dtos.AdditionalServiceListDto;
 import com.btkAkademi.rentACar.business.dtos.CarDto;
 import com.btkAkademi.rentACar.business.dtos.PaymentDto;
 import com.btkAkademi.rentACar.business.dtos.PaymentListDto;
@@ -44,11 +45,13 @@ public class PaymentManager implements PaymentService {
 	private CarService carService;
 	private FakePosSystemService fakePosSystemService;
 	private PromoCodeService promoCodeService;
+	private AdditionalServiceItemService additionalServiceItemService;
 
 	@Autowired
 	public PaymentManager(PaymentDao paymentDao, ModelMapperService modelMapperService, RentalService rentalService,
 			AdditionalServiceService additionalServiceService, CarService carService,
-			FakePosSystemService fakePosSystemService, PromoCodeService promoCodeService
+			FakePosSystemService fakePosSystemService, PromoCodeService promoCodeService,
+			AdditionalServiceItemService additionalServiceItemService
 
 	) {
 		super();
@@ -59,6 +62,7 @@ public class PaymentManager implements PaymentService {
 		this.carService = carService;
 		this.fakePosSystemService = fakePosSystemService;
 		this.promoCodeService = promoCodeService;
+		this.additionalServiceItemService = additionalServiceItemService;
 
 	}
 
@@ -170,15 +174,17 @@ public class PaymentManager implements PaymentService {
 
 	
 		CarDto carDto = carService.getCarById(rental.getCarId()).getData();
-		List<AdditionalServiceDto> additionalService = additionalServiceService.getAllByRentalId(rentalId).getData();
+		List<AdditionalServiceListDto> additionalService = additionalServiceService.getAllByRentalId(rentalId).getData();
 
 		double serviceTotalPrice = 0;
 
 		double totalPrice = 0;
 
-		for (AdditionalServiceDto additional : additionalService) {
+		for (AdditionalServiceListDto additional : additionalService) {
+			
+			double additionalServiceItemPrice = additionalServiceItemService.getById(additional.getAdditionalServiceItemId()).getData().getPrice();
 
-			serviceTotalPrice += additional.getPrice();
+			serviceTotalPrice += additionalServiceItemPrice;
 
 		}
 

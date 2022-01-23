@@ -14,13 +14,15 @@ import lombok.NoArgsConstructor;
 public class InvoiceIndividualCustomerDto {
 
 	private int id;
-	private String nationalityId;
+	private String nationalityNumber;
 	private String firstName;
 	private String lastName;
 	private String email;
 	private LocalDate rentDate;
 	private LocalDate returnedDate;
 	private double amount;
+	private double rentPrice;
+	
 	LocalDate creationDate;
-	private List<AdditionalServiceDto> additonalServices;
+	private List<AdditionalServiceItemListDto> additionalServiceItems;
 }

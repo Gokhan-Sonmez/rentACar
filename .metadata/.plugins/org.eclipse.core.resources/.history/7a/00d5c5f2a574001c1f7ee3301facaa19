@@ -1,5 +1,0 @@
-package com.btkAkademi.rentACar.business.requests.additionalService;
-
-public class CreateAdditionalServiceRequest {
-
-}

@@ -1,11 +1,13 @@
 package com.btkAkademi.rentACar.business.concretes;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.btkAkademi.rentACar.business.abstracts.AdditionalServiceItemService;
 import com.btkAkademi.rentACar.business.abstracts.AdditionalServiceService;
 import com.btkAkademi.rentACar.business.abstracts.CorparateCustomerService;
 import com.btkAkademi.rentACar.business.abstracts.IndividualCustomerService;
@@ -13,7 +15,9 @@ import com.btkAkademi.rentACar.business.abstracts.InvoiceService;
 import com.btkAkademi.rentACar.business.abstracts.PaymentService;
 import com.btkAkademi.rentACar.business.abstracts.RentalService;
 import com.btkAkademi.rentACar.business.constants.Messages;
-import com.btkAkademi.rentACar.business.dtos.AdditionalServiceDto;
+
+import com.btkAkademi.rentACar.business.dtos.AdditionalServiceItemListDto;
+import com.btkAkademi.rentACar.business.dtos.AdditionalServiceListDto;
 import com.btkAkademi.rentACar.business.dtos.CorparateCustomerDto;
 import com.btkAkademi.rentACar.business.dtos.IndividualCustomerDto;
 
@@ -46,12 +50,14 @@ public class InvoiceManager implements InvoiceService {
 	private RentalService rentalService;
 	private PaymentService paymentService;
 	private AdditionalServiceService additionalServiceService;
+	private AdditionalServiceItemService additionalServiceItemService;
 
 	@Autowired
 	public InvoiceManager(InvoiceDao invoiceDao, ModelMapperService modelMapperService,
 			IndividualCustomerService individualCustomerService, CorparateCustomerService corporateCustomerService,
 			RentalService rentalService, PaymentService paymentService,
-			AdditionalServiceService additionalServiceService) {
+			AdditionalServiceService additionalServiceService,
+			AdditionalServiceItemService additionalServiceItemService) {
 		super();
 		this.invoiceDao = invoiceDao;
 		this.modelMapperService = modelMapperService;
@@ -61,45 +67,86 @@ public class InvoiceManager implements InvoiceService {
 		this.rentalService = rentalService;
 		this.paymentService = paymentService;
 		this.additionalServiceService = additionalServiceService;
+		this.additionalServiceItemService = additionalServiceItemService;
 	}
 
 	@Override
 	public DataResult<InvoiceIndividualCustomerDto> getInvoiceForIndividualCustomer(int rentalId) {
 
 		Invoice invoice = invoiceDao.getByRentalId(rentalId);
+
 		RentalDto rental = rentalService.getById(rentalId).getData();
+
 		IndividualCustomerDto customer = individualCustomerService.getById(rental.getCustomerId()).getData();
-		List<AdditionalServiceDto> additionalServices = additionalServiceService.getAllByRentalId(rentalId).getData();
+
+		List<AdditionalServiceListDto> additionalServices = additionalServiceService.getAllByRentalId(rentalId)
+				.getData();
+
+		List<AdditionalServiceItemListDto> additionalServiceItems = new ArrayList<AdditionalServiceItemListDto>();
+
+		double itemPrices = 0;
+
+		for (AdditionalServiceListDto additionalServiceDto : additionalServices) {
+
+			itemPrices += additionalServiceItemService.getById(additionalServiceDto.getAdditionalServiceItemId())
+					.getData().getPrice();
+
+			additionalServiceItems.add(
+					additionalServiceItemService.getById(additionalServiceDto.getAdditionalServiceItemId()).getData());
+		}
+
 		List<PaymentListDto> payments = paymentService.getAllByRentalId(rentalId).getData();
 		double totalPrice = 0;
 		for (PaymentListDto payment : payments) {
 			totalPrice += payment.getMoneyPaid();
 		}
+		
+		double rentPrice = totalPrice-itemPrices;
 
 		InvoiceIndividualCustomerDto responseCustomerDto = InvoiceIndividualCustomerDto.builder().id(invoice.getId())
 				.firstName(customer.getFirstName()).lastName(customer.getLastName())
-				.nationalityId(customer.getNationalityId()).email(customer.getEmail()).amount(totalPrice)
+				.nationalityNumber(customer.getNationalNumber()).email(customer.getEmail()).amount(totalPrice)
 				.rentDate(rental.getRentDate()).returnedDate(rental.getReturnDate())
-				.creationDate(invoice.getCreatedDate()).additonalServices(additionalServices).build();
+				.creationDate(invoice.getCreatedDate()).additionalServiceItems(additionalServiceItems).rentPrice(rentPrice).build();
 		return new SuccessDataResult<InvoiceIndividualCustomerDto>(responseCustomerDto);
 	}
 
 	@Override
 	public DataResult<InvoiceCorporateCustomerDto> getInvoiceForCorporateCustomer(int rentalId) {
+
 		Invoice invoice = invoiceDao.getByRentalId(rentalId);
+
 		RentalDto rental = rentalService.getById(rentalId).getData();
+
 		CorparateCustomerDto customer = corparateCustomerService.getById(rental.getCustomerId()).getData();
-		List<AdditionalServiceDto> additionalServices = additionalServiceService.getAllByRentalId(rentalId).getData();
+
+		List<AdditionalServiceListDto> additionalServices = additionalServiceService.getAllByRentalId(rentalId)
+				.getData();
+		List<AdditionalServiceItemListDto> additionalServiceItems = new ArrayList<AdditionalServiceItemListDto>();
+
+		double itemPrices = 0;
+
+		for (AdditionalServiceListDto additionalServiceDto : additionalServices) {
+
+			itemPrices += additionalServiceItemService.getById(additionalServiceDto.getAdditionalServiceItemId())
+					.getData().getPrice();
+
+			additionalServiceItems.add(
+					additionalServiceItemService.getById(additionalServiceDto.getAdditionalServiceItemId()).getData());
+		}
+
 		List<PaymentListDto> payments = paymentService.getAllByRentalId(rentalId).getData();
 		double totalPrice = 0;
 		for (PaymentListDto payment : payments) {
 			totalPrice += payment.getMoneyPaid();
 		}
 
+		double rentPrice = totalPrice-itemPrices;
+		
 		InvoiceCorporateCustomerDto responseCustomerDto = InvoiceCorporateCustomerDto.builder().id(invoice.getId())
 				.companyName(customer.getCompanyName()).taxNumber(customer.getTaxtNumber()).email(customer.getEmail())
 				.amount(totalPrice).rentDate(rental.getRentDate()).returnedDate(rental.getReturnDate())
-				.creationDate(invoice.getCreatedDate()).additonalServices(additionalServices).build();
+				.creationDate(invoice.getCreatedDate()).additionalServiceItems(additionalServiceItems).rentPrice(rentPrice).build();
 		return new SuccessDataResult<InvoiceCorporateCustomerDto>(responseCustomerDto);
 	}
 

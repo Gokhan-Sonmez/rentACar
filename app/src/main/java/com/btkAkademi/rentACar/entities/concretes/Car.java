@@ -27,18 +27,28 @@ public class Car {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id")
 	private int id;
+	
 	@Column(name="car_name")
 	private String carName;
+	
+	@Column(name="image_path")
+	private String imagePath; 
+	
 	@Column(name="daily_price")
 	private double dailyPrice;
+	
 	@Column(name="model_year")
 	private int modelYear;
+	
 	@Column(name="description")
 	private String description;
+	
 	@Column(name="findex_score")
 	private int findexScore;
+	
 	@Column(name="kilometer")
 	private int kilometer;
+	
 	@Column(name="min_age")
 	private int minAge;
 	

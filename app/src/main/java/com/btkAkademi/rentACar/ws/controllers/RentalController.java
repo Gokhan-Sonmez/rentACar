@@ -76,11 +76,11 @@ public class RentalController {
 		return this.rentalService.getAll();
 	}
 
-	@GetMapping("get-by-id/{id}")
+	@GetMapping("getByRentalId/{rentalId}")
 
-	public DataResult<RentalDto> getById(int id) {
+	public DataResult<RentalDto> getById(int rentalId) {
 
-		return this.rentalService.getById(id);
+		return this.rentalService.getById(rentalId);
 	}
 
 }
