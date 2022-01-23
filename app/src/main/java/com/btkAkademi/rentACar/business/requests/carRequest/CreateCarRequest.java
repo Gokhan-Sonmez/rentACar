@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 public class CreateCarRequest {
 	private int brandId;
 	private int colorId;
+	private int cityId;
 	private int carClassId;
 	private String carName;
 	private double dailyPrice;

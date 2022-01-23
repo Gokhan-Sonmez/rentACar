@@ -20,7 +20,7 @@ public interface CarDao extends JpaRepository<Car, Integer> {
 
 	List<Car> getByCarClassId(int id);
 
-	List<Car> getByCity_IdAndBrand_Id(int cityId,int brandId);
+	List<Car> getByColor_IdAndBrand_Id(int colorId,int brandId);
 
 
 	@Query(value = "select \r\n" + "	c.id \r\n" + "from cars c\r\n"

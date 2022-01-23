@@ -37,11 +37,16 @@ public class PromoCodeController {
 		return this.promoCodeService.getAll();
 	}
 	
-	@GetMapping("get-by-id/{id}")
-	public DataResult<PromoCodeDto> getById(@PathVariable int id)
+	@GetMapping("getById/{promoCodeId}")
+	public DataResult<PromoCodeDto> getById(@PathVariable int promoCodeId)
 	{
 		
-		return this.getById(id);
+		return this.promoCodeService.getById(promoCodeId);
+	}
+	@GetMapping("getByCode/{code}")
+	DataResult<PromoCodeDto> getByCode(@PathVariable String code)
+	{
+		return this.promoCodeService.getByCode(code);
 	}
 	
 	@PostMapping("add")

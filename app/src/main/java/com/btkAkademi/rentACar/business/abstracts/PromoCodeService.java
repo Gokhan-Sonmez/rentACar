@@ -13,6 +13,7 @@ public interface PromoCodeService {
 
 	DataResult<List<PromoCodeListDto>> getAll();
 	DataResult<PromoCodeDto> getById(int id);
+	DataResult<PromoCodeDto> getByCode(String code);
 	
 	Result add(CreatePromoCodeRequest createPromoCodeRequest);
 	Result update(UpdatePromoCodeRequest updatePromoCodeRequest);

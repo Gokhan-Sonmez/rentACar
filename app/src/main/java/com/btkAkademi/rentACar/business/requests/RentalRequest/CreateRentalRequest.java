@@ -15,18 +15,10 @@ public class CreateRentalRequest {
 
 	private int carId;
 
-	private int pickUpCityId;
-
-	private int returnCityId;
-
 	private int promoCodeId;
 
 	private LocalDate rentDate;
 
-	private LocalDate returnDate;
 
-	private int rentedKilometer;
-
-	private int returnKilometer;
 
 }

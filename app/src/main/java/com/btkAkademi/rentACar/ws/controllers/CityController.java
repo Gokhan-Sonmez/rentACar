@@ -39,10 +39,10 @@ public class CityController {
 		return this.cityService.getAll();
 	}
 	
-	@GetMapping("get-by-id/{id}")
-	public DataResult<CityDto> getById(@PathVariable int id) {
+	@GetMapping("getById/{cityId}")
+	public DataResult<CityDto> getById(@PathVariable int cityId) {
 
-		return this.cityService.getCityById(id);
+		return this.cityService.getCityById(cityId);
 	}
 
 	@PostMapping("add")

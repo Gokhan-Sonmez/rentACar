@@ -22,7 +22,8 @@ public interface CarService {
 
 	DataResult<List<CarListDto>> getCarByColorId(int colorId);
 	DataResult<List<CarListDto>> getCarByBrandId(int brandId);
-	
+	DataResult<List<CarListDto>> getCarByCityId(int cityId);
+	DataResult<List<CarListDto>> getCarByBrandIdAndColorId(int brandId,int colorId);
 	
 
 

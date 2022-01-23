@@ -8,5 +8,5 @@ import com.btkAkademi.rentACar.entities.concretes.PromoCode;
 public interface PromoCodeDao extends JpaRepository<PromoCode, Integer> {
 
 
-	PromoCode findByCode(String code);
+	PromoCode getByCode(String code);
 }

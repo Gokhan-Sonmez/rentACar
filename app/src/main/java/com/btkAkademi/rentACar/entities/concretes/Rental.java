@@ -37,10 +37,10 @@ public class Rental {
 	private LocalDate returnDate;
 	
 	@Column(name="rented_kilometer")
-	private int rentedKilometer;
+	private Integer rentedKilometer;
 	
 	@Column(name="return_kilometer")
-	private int returnKilometer;
+	private Integer returnKilometer;
 
 	
 	@ManyToOne

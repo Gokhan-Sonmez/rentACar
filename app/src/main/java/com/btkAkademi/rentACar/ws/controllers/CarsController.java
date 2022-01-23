@@ -55,6 +55,17 @@ public class CarsController {
 	public DataResult<List<CarListDto>> getCarByColorId(int colorId) {
 		return this.carService.getCarByColorId(colorId);
 	}
+	
+	@GetMapping("getCarByCityId")
+	public DataResult<List<CarListDto>> getCarByCityId(int cityId) {
+		return this.carService.getCarByCityId(cityId);
+	}
+	
+	@GetMapping("getCarBrandIdAndColorId")
+	public DataResult<List<CarListDto>> getCarByBrandIdAndColorId(int brandId,int colorId)
+	{
+		return this.carService.getCarByBrandIdAndColorId(brandId,colorId);
+	}
 
 	@GetMapping("getallbypage")
 	DataResult<List<CarListDto>> getAll(@RequestParam int pageNo, @RequestParam(defaultValue = "10") int pageSize) {

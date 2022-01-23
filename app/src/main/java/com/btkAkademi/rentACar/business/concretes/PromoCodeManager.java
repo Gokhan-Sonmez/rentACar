@@ -39,7 +39,7 @@ public class PromoCodeManager implements PromoCodeService {
 	public DataResult<List<PromoCodeListDto>> getAll() {
 		List<PromoCode> promoCodeList = this.promoCodeDao.findAll();
 		List<PromoCodeListDto> response = promoCodeList.stream()
-				.map(promoCode -> this.modelMapperService.forDto().map(promoCodeList, PromoCodeListDto.class))
+				.map(promoCode -> this.modelMapperService.forDto().map(promoCode, PromoCodeListDto.class))
 				.collect(Collectors.toList());
 
 		return new SuccessDataResult<List<PromoCodeListDto>>(response, Messages.promoCodeListed);
@@ -49,6 +49,14 @@ public class PromoCodeManager implements PromoCodeService {
 	public DataResult<PromoCodeDto> getById(int id) {
 
 		PromoCode promoCode = this.promoCodeDao.getById(id);
+		PromoCodeDto response = this.modelMapperService.forDto().map(promoCode, PromoCodeDto.class);
+
+		return new SuccessDataResult<PromoCodeDto>(response, Messages.promoCodeListed);
+	}
+	
+	@Override
+	public DataResult<PromoCodeDto> getByCode(String code) {
+		PromoCode promoCode = this.promoCodeDao.getByCode(code);
 		PromoCodeDto response = this.modelMapperService.forDto().map(promoCode, PromoCodeDto.class);
 
 		return new SuccessDataResult<PromoCodeDto>(response, Messages.promoCodeListed);
@@ -102,5 +110,7 @@ public class PromoCodeManager implements PromoCodeService {
 		return new SuccessResult();
 
 	}
+
+	
 
 }

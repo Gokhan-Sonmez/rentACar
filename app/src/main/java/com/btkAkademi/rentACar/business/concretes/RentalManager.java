@@ -29,6 +29,7 @@ import com.btkAkademi.rentACar.core.utilities.results.Result;
 import com.btkAkademi.rentACar.core.utilities.results.SuccessDataResult;
 import com.btkAkademi.rentACar.core.utilities.results.SuccessResult;
 import com.btkAkademi.rentACar.dataAccess.abstracts.RentalDao;
+import com.btkAkademi.rentACar.entities.concretes.City;
 import com.btkAkademi.rentACar.entities.concretes.Rental;
 
 @Service
@@ -69,8 +70,6 @@ public class RentalManager implements RentalService {
 
 		Result result = BusinessRules.run(checkIfCustomerIdExists(createRentalRequest.getCustomerId()),
 				checkIfCarInMaintenance(createRentalRequest.getCarId()),
-				checkIfCityExist(createRentalRequest.getPickUpCityId()),
-				checkIfCityExist(createRentalRequest.getReturnCityId()),
 				checkIfIsCarAlreadyRented(createRentalRequest.getCarId()),
 				checkIfCustomerAgeIsEnough(createRentalRequest.getCustomerId(), createRentalRequest.getCarId()),
 				checkIfIndividualCustomerHasEnoughCreditScore(
@@ -94,6 +93,13 @@ public class RentalManager implements RentalService {
 			rental.setCar(newCarToRent.getData());
 		}
 		//
+		
+		
+		rental.setReturnKilometer(null);
+		rental.setRentedKilometer(car.getKilometer());
+		City pickUpCity = modelMapperService.forRequest().map(cityService.getCityById(car.getCityId()).getData(),
+				City.class);
+		rental.setPickUpCity(pickUpCity);
 		this.rentalDao.save(rental);
 
 		return new SuccessResult(Messages.rentalAdded);
@@ -141,8 +147,6 @@ public class RentalManager implements RentalService {
 
 		Result result = BusinessRules.run(checkIfCustomerIdExists(createRentalRequest.getCustomerId()),
 				checkIfCarInMaintenance(createRentalRequest.getCarId()),
-				checkIfCityExist(createRentalRequest.getPickUpCityId()),
-				checkIfCityExist(createRentalRequest.getReturnCityId()),
 				checkIfIsCarAlreadyRented(createRentalRequest.getCarId()),
 				checkIfCorporateCustomerHasEnoughCreditScore(
 						corparateCustomerService.getById(createRentalRequest.getCustomerId()).getData().getTaxtNumber(),
@@ -156,6 +160,23 @@ public class RentalManager implements RentalService {
 		}
 
 		Rental rental = this.modelMapperService.forRequest().map(createRentalRequest, Rental.class);
+		
+		// checkAvailableCarsByCarClass
+				var car = this.carService.getCarById(createRentalRequest.getCarId()).getData();
+				if (!checkIfCarInMaintenance(car.getId()).isSuccess() || !checkIfIsCarAlreadyRented(car.getId()).isSuccess()) {
+
+					var newCarToRent = this.carService.getAvailableCarsByCarClassId(car.getCarClassId());
+					if (!newCarToRent.isSuccess()) {
+						return new ErrorResult();
+					}
+					rental.setCar(newCarToRent.getData());
+				}
+				//
+		rental.setReturnKilometer(null);
+		rental.setRentedKilometer(car.getKilometer());
+		City pickUpCity = modelMapperService.forRequest().map(cityService.getCityById(car.getCityId()).getData(),
+				City.class);
+		rental.setPickUpCity(pickUpCity);
 		this.rentalDao.save(rental);
 
 		return new SuccessResult(Messages.rentalAdded);

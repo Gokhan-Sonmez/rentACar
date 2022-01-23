@@ -36,10 +36,10 @@ public class CarClassController {
 		return this.carClassService.getAll();
 	}
 	
-	@GetMapping("getById/{id}")
-	DataResult<CarClassDto> getById(int id)
+	@GetMapping("getById/{carClassId}")
+	DataResult<CarClassDto> getById(int carClassId)
 	{
-		return this.carClassService.getById(id);
+		return this.carClassService.getById(carClassId);
 	}
 	
 	@PostMapping("add")

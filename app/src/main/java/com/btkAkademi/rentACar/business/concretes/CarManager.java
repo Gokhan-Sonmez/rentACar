@@ -116,7 +116,7 @@ public class CarManager implements CarService {
 	}
 
 	@Override
-	public  DataResult<List<CarListDto>> getCarByBrandId(int brandId) {
+	public DataResult<List<CarListDto>> getCarByBrandId(int brandId) {
 		List<Car> cars = this.carDao.getByBrand_Id(brandId);
 		List<CarListDto> response = cars.stream().map(car -> modelMapperService.forDto().map(car, CarListDto.class))
 				.collect(Collectors.toList());
@@ -124,7 +124,24 @@ public class CarManager implements CarService {
 		return new SuccessDataResult<List<CarListDto>>(response, Messages.carListed);
 	}
 
+	@Override
+	public DataResult<List<CarListDto>> getCarByBrandIdAndColorId(int brandId, int colorId) {
+		List<Car> cars = this.carDao.getByColor_IdAndBrand_Id(colorId, brandId);
 
+		List<CarListDto> response = cars.stream().map(car -> modelMapperService.forDto().map(car, CarListDto.class))
+				.collect(Collectors.toList());
+
+		return new SuccessDataResult<List<CarListDto>>(response, Messages.carListed);
+	}
+
+	@Override
+	public DataResult<List<CarListDto>> getCarByCityId(int cityId) {
+		List<Car> cars = this.carDao.getByCity_Id(cityId);
+		List<CarListDto> response = cars.stream().map(car -> modelMapperService.forDto().map(car, CarListDto.class))
+				.collect(Collectors.toList());
+
+		return new SuccessDataResult<List<CarListDto>>(response, Messages.carListed);
+	}
 
 	@Override
 	public DataResult<Car> getAvailableCarsByCarClassId(int carClassId) {
@@ -144,8 +161,6 @@ public class CarManager implements CarService {
 		}
 		return new SuccessResult();
 	}
-
-
 
 	/*
 	 * private Result checkIfCarClassExist(String carClass) {
