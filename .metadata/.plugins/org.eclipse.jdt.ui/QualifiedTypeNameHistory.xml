@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="javax.persistence.JoinColumn"/>
     <fullyQualifiedTypeName name="com.btkAkademi.rentACar.business.dtos.CarDto"/>
     <fullyQualifiedTypeName name="javax.persistence.OneToOne"/>
     <fullyQualifiedTypeName name="com.btkAkademi.rentACar.business.dtos.CarClassListDto"/>
@@ -14,7 +13,6 @@
     <fullyQualifiedTypeName name="com.btkAkademi.rentACar.business.abstracts.CarClassService"/>
     <fullyQualifiedTypeName name="com.btkAkademi.rentACar.business.requests.carClass.UpdateCarClassRequest"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.GetMapping"/>
-    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PathVariable"/>
     <fullyQualifiedTypeName name="javax.validation.Valid"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestBody"/>
     <fullyQualifiedTypeName name="com.btkAkademi.rentACar.business.requests.invoiceRequest.CreateInvoiceRequest"/>
@@ -60,4 +58,6 @@
     <fullyQualifiedTypeName name="com.btkAkademi.rentACar.entities.concretes.City"/>
     <fullyQualifiedTypeName name="com.btkAkademi.rentACar.business.abstracts.AdditionalServiceItemService"/>
     <fullyQualifiedTypeName name="com.btkAkademi.rentACar.business.dtos.AdditionalServiceItemListDto"/>
+    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PathVariable"/>
+    <fullyQualifiedTypeName name="com.btkAkademi.rentACar.entities.concretes.Rental"/>
 </qualifiedTypeNameHistroy>

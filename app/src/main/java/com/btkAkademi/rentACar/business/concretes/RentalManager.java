@@ -248,9 +248,11 @@ public class RentalManager implements RentalService {
 	}
 
 	@Override
-	public DataResult<Rental> getByCarId(int id) {
+	public DataResult<RentalDto> getByCarId(int id) {
 		Rental rental = this.rentalDao.findByCarId(id);
-		return new SuccessDataResult<Rental>(rental, Messages.carListed);
+		RentalDto response = modelMapperService.forDto().map(rental, RentalDto.class);
+
+		return new SuccessDataResult<RentalDto>(response, Messages.rentalListed);
 	}
 
 	// validation

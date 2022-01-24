@@ -26,7 +26,7 @@ public interface RentalService {
 
 	DataResult<RentalDto> getById(int id);
 
-	DataResult<Rental> getByCarId(int id);
+	DataResult<RentalDto> getByCarId(int id);
 
 	boolean isCarRented(int carId);
 }
