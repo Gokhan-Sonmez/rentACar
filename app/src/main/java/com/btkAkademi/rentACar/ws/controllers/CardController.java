@@ -38,10 +38,10 @@ public class CardController {
 
 	}
 
-	@GetMapping("get-by-id/{id}")
-	public DataResult<CardDto> getById(@PathVariable int id) {
+	@GetMapping("getById/{cardId}")
+	public DataResult<CardDto> getById(@PathVariable int cardId) {
 
-		return this.cardService.getById(id);
+		return this.cardService.getById(cardId);
 	}
 
 	@PostMapping("add")

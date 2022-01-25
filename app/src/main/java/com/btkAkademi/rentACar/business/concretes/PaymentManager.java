@@ -20,6 +20,8 @@ import com.btkAkademi.rentACar.business.dtos.CarDto;
 import com.btkAkademi.rentACar.business.dtos.PaymentDto;
 import com.btkAkademi.rentACar.business.dtos.PaymentListDto;
 import com.btkAkademi.rentACar.business.dtos.RentalDto;
+import com.btkAkademi.rentACar.business.dtos.RentalListDto;
+import com.btkAkademi.rentACar.business.requests.RentalRequest.CalculateTotalPriceRequest;
 import com.btkAkademi.rentACar.business.requests.paymentRequest.CreatePaymentRequest;
 import com.btkAkademi.rentACar.business.requests.paymentRequest.UpdatePaymentRequest;
 import com.btkAkademi.rentACar.core.utilities.adapters.abstracts.FakePosSystemService;
@@ -100,8 +102,14 @@ public class PaymentManager implements PaymentService {
 
 		int rentalId = createPaymentRequest.getRentalId();
 
-		payment = paymentCalculate(payment, rentalId);
+		RentalDto rental = rentalService.getById(rentalId).getData();
+
+		// calculates total amount
+		double totalPrice = totalPriceCalculator(rental, createPaymentRequest.getReturnDate());
+
+		payment.setMoneyPaid(totalPrice);
 		payment.setId(0);
+		payment.setPaymentDate(LocalDate.now());
 		this.paymentDao.save(payment);
 
 		return new SuccessResult(Messages.paymentAdded);
@@ -135,19 +143,28 @@ public class PaymentManager implements PaymentService {
 
 		return new SuccessResult(Messages.paymentDeleted);
 	}
-	
+
 	@Override
 	public DataResult<List<PaymentListDto>> getAllByRentalId(int id) {
-		
-	
-		List<Payment> paymentList = this.paymentDao.getAllByRentalId(id); 
+
+		List<Payment> paymentList = this.paymentDao.getAllByRentalId(id);
 		List<PaymentListDto> response = paymentList.stream()
 				.map(payment -> modelMapperService.forDto().map(payment, PaymentListDto.class))
 				.collect(Collectors.toList());
 		return new SuccessDataResult<List<PaymentListDto>>(response);
 	}
-	
-	//valid
+
+	@Override
+	public DataResult<Double> calculateTotalPriceForDisplay(CalculateTotalPriceRequest calculateTotalPriceRequest) {
+
+		RentalDto rental = rentalService.getById(calculateTotalPriceRequest.getRentalId()).getData();
+		System.out.println(rental.getRentDate());
+		Double price = this.totalPriceCalculator(rental, calculateTotalPriceRequest.getReturnDate());
+		System.out.println(price);
+		return new SuccessDataResult<Double>(price);
+	}
+
+	// valid
 
 	private Result checkIfPaymentIdExist(int id) {
 		if (!paymentDao.existsById(id)) {
@@ -156,8 +173,6 @@ public class PaymentManager implements PaymentService {
 
 		return new SuccessResult();
 	}
-	
-	
 
 	private Result checkIfCreditCardIsValid(Card card) {
 		var result = this.fakePosSystemService.checkIfCreditCardIsValid(card);
@@ -165,49 +180,80 @@ public class PaymentManager implements PaymentService {
 		return result;
 	}
 
-	private Payment paymentCalculate(Payment payment, int rentalId) {
+	// To calculate total price
+	private double totalPriceCalculator(RentalDto rental, LocalDate returnDate) {
 
-		RentalDto rental = rentalService.getById(rentalId).getData();
+		double totalPrice = 0.0;
+		System.out.println(rental.getRentDate() + " " + returnDate);
+		// finds usage day
+		long days = ChronoUnit.DAYS.between(rental.getRentDate(), returnDate);
 
-		// date difference
-		long days = ChronoUnit.DAYS.between(rental.getRentDate(), rental.getReturnDate());
+		// if return date and rent date are equal than we charge one day
+		if (days == 0)
+			days = 1;
+		// calculates total usage price by day
+		totalPrice += days * carService.getCarById(rental.getCarId()).getData().getDailyPrice();
 
-	
-		CarDto carDto = carService.getCarById(rental.getCarId()).getData();
-		List<AdditionalServiceListDto> additionalService = additionalServiceService.getAllByRentalId(rentalId).getData();
-
-		double serviceTotalPrice = 0;
-
-		double totalPrice = 0;
-
-		for (AdditionalServiceListDto additional : additionalService) {
-			
-			double additionalServiceItemPrice = additionalServiceItemService.getById(additional.getAdditionalServiceItemId()).getData().getPrice();
-
-			serviceTotalPrice += additionalServiceItemPrice;
-
-		}
-
-		totalPrice = carDto.getDailyPrice();
-
+		// discount
 		// discount
 		if (rental.getPromoCodeId() != 0) {
 			double discountRate = 0;
 			discountRate = promoCodeService.getById(rental.getPromoCodeId()).getData().getDiscountRate();
 			totalPrice = totalPrice - (totalPrice * discountRate);
 		}
-
-		// calculate
-		Double total = (totalPrice * days) + serviceTotalPrice;
-
-		if (!rental.getReturnDate().equals(LocalDate.now())) {
-			payment.setMoneyPaid(total);
+		// calculates total additional service price
+		List<AdditionalServiceListDto> services = additionalServiceService.getAllByRentalId(rental.getId()).getData();
+		for (AdditionalServiceListDto additionalService : services) {
+			double additionalServiceItemPrice = additionalServiceItemService
+					.getById(additionalService.getAdditionalServiceItemId()).getData().getPrice();
+			totalPrice += additionalServiceItemPrice;
 		}
 
-		return payment;
-
+		return totalPrice;
 	}
 
-	
+	/*
+	 * private Payment paymentCalculate(Payment payment, int rentalId) {
+	 * 
+	 * RentalDto rental = rentalService.getById(rentalId).getData();
+	 * 
+	 * // date difference long days = ChronoUnit.DAYS.between(rental.getRentDate(),
+	 * rental.getReturnDate());
+	 * 
+	 * 
+	 * CarDto carDto = carService.getCarById(rental.getCarId()).getData();
+	 * List<AdditionalServiceListDto> additionalService =
+	 * additionalServiceService.getAllByRentalId(rentalId).getData();
+	 * 
+	 * double serviceTotalPrice = 0;
+	 * 
+	 * double totalPrice = 0;
+	 * 
+	 * for (AdditionalServiceListDto additional : additionalService) {
+	 * 
+	 * double additionalServiceItemPrice =
+	 * additionalServiceItemService.getById(additional.getAdditionalServiceItemId())
+	 * .getData().getPrice();
+	 * 
+	 * serviceTotalPrice += additionalServiceItemPrice;
+	 * 
+	 * }
+	 * 
+	 * totalPrice = carDto.getDailyPrice();
+	 * 
+	 * // discount if (rental.getPromoCodeId() != 0) { double discountRate = 0;
+	 * discountRate =
+	 * promoCodeService.getById(rental.getPromoCodeId()).getData().getDiscountRate()
+	 * ; totalPrice = totalPrice - (totalPrice * discountRate); }
+	 * 
+	 * // calculate Double total = (totalPrice * days) + serviceTotalPrice;
+	 * 
+	 * if (!rental.getReturnDate().equals(LocalDate.now())) {
+	 * payment.setMoneyPaid(total); }
+	 * 
+	 * return payment;
+	 * 
+	 * }
+	 */
 
 }

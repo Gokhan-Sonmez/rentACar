@@ -59,6 +59,10 @@ public class Rental {
 	@JoinColumn(name="return_city_id")
 	private City returnCity;
 	
+	@ManyToOne
+	@JoinColumn(name = "promo_code_id")
+	private PromoCode promoCode;
+	
 	@OneToMany(mappedBy = "rental")
 	private List<AdditionalService> addtionalServices;
 	
@@ -68,7 +72,6 @@ public class Rental {
 	@OneToOne(mappedBy = "rental")
 	private Invoice invoice;
 	
-	@OneToMany(mappedBy="rental")
-	private List<PromoCode> promoCode;
+
 
 }

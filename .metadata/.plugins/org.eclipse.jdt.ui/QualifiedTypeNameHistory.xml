@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="com.btkAkademi.rentACar.business.dtos.CarDto"/>
-    <fullyQualifiedTypeName name="javax.persistence.OneToOne"/>
-    <fullyQualifiedTypeName name="com.btkAkademi.rentACar.business.dtos.CarClassListDto"/>
     <fullyQualifiedTypeName name="com.btkAkademi.rentACar.business.dtos.CarClassDto"/>
     <fullyQualifiedTypeName name="com.btkAkademi.rentACar.business.requests.carClass.CreateCarClassRequest"/>
     <fullyQualifiedTypeName name="com.btkAkademi.rentACar.dataAccess.abstracts.CarClassDao"/>
@@ -31,16 +28,11 @@
     <fullyQualifiedTypeName name="javax.persistence.GenerationType"/>
     <fullyQualifiedTypeName name="javax.persistence.Id"/>
     <fullyQualifiedTypeName name="javax.persistence.Column"/>
-    <fullyQualifiedTypeName name="javax.persistence.OneToMany"/>
     <fullyQualifiedTypeName name="org.springframework.data.jpa.repository.JpaRepository"/>
     <fullyQualifiedTypeName name="java.lang.Integer"/>
     <fullyQualifiedTypeName name="com.btkAkademi.rentACar.core.utilities.results.Result"/>
     <fullyQualifiedTypeName name="com.btkAkademi.rentACar.business.requests.additionalServiceItemRequest.CreateAdditionalServiceItemRequest"/>
     <fullyQualifiedTypeName name="com.btkAkademi.rentACar.business.requests.additionalServiceItemRequest.UpdateAdditionalServiceItemRequest"/>
-    <fullyQualifiedTypeName name="java.util.List"/>
-    <fullyQualifiedTypeName name="lombok.Data"/>
-    <fullyQualifiedTypeName name="lombok.AllArgsConstructor"/>
-    <fullyQualifiedTypeName name="lombok.NoArgsConstructor"/>
     <fullyQualifiedTypeName name="com.btkAkademi.rentACar.core.utilities.results.DataResult"/>
     <fullyQualifiedTypeName name="com.btkAkademi.rentACar.business.dtos.AdditionalServiceItemDto"/>
     <fullyQualifiedTypeName name="com.btkAkademi.rentACar.business.dtos.AdditionalServiceListDto"/>
@@ -60,4 +52,12 @@
     <fullyQualifiedTypeName name="com.btkAkademi.rentACar.business.dtos.AdditionalServiceItemListDto"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PathVariable"/>
     <fullyQualifiedTypeName name="com.btkAkademi.rentACar.entities.concretes.Rental"/>
+    <fullyQualifiedTypeName name="javax.persistence.OneToMany"/>
+    <fullyQualifiedTypeName name="java.util.List"/>
+    <fullyQualifiedTypeName name="lombok.AllArgsConstructor"/>
+    <fullyQualifiedTypeName name="lombok.Data"/>
+    <fullyQualifiedTypeName name="lombok.NoArgsConstructor"/>
+    <fullyQualifiedTypeName name="java.time.LocalDate"/>
+    <fullyQualifiedTypeName name="com.btkAkademi.rentACar.business.dtos.RentalListDto"/>
+    <fullyQualifiedTypeName name="com.btkAkademi.rentACar.business.requests.RentalRequest.CalculateTotalPriceRequest"/>
 </qualifiedTypeNameHistroy>

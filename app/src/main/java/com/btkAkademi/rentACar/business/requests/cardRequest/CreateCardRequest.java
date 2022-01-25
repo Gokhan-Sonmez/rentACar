@@ -16,7 +16,8 @@ public class CreateCardRequest {
 
 	private String nameOnTheCard;
 
-	private String expirationDate;
+	private String month;
+	private String year;
 
 	private int cvv;
 }

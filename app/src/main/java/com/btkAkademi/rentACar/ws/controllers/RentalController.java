@@ -45,14 +45,12 @@ public class RentalController {
 	}
 
 	@DeleteMapping("deleteforindividiualcustomer/{id}")
-
 	public Result delete(@PathVariable int id) {
 		return this.rentalService.deleteForIndividiualCustomer(id);
 	}
 	
 	//CorparateCustomer
 	@PostMapping("addforcorparatecustomer")
-
 	public Result addForCorparateCustomer(@RequestBody CreateRentalRequest createRentalRequest) {
 		return this.rentalService.addForCorparateCustomer(createRentalRequest);
 	}

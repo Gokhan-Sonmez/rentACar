@@ -19,6 +19,7 @@ public class CreateCarRequest {
 	private int kilometer;
 	private String description;
 	private int minAge;
+	private String imagePath;
 	
 	
 }

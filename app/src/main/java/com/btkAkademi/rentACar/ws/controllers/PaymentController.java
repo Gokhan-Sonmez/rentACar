@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.btkAkademi.rentACar.business.abstracts.PaymentService;
 import com.btkAkademi.rentACar.business.dtos.PaymentDto;
 import com.btkAkademi.rentACar.business.dtos.PaymentListDto;
+import com.btkAkademi.rentACar.business.requests.RentalRequest.CalculateTotalPriceRequest;
 import com.btkAkademi.rentACar.business.requests.paymentRequest.CreatePaymentRequest;
 import com.btkAkademi.rentACar.business.requests.paymentRequest.UpdatePaymentRequest;
 import com.btkAkademi.rentACar.core.utilities.results.DataResult;
@@ -38,10 +39,10 @@ public class PaymentController {
 		return this.paymentService.getAll();
 	}
 	
-	@GetMapping("get-by-id/{id}")
-	DataResult<PaymentDto> getById(@PathVariable int id){
+	@GetMapping("getById/{paymentId}")
+	DataResult<PaymentDto> getById(@PathVariable int paymentId){
 		
-		return this.paymentService.getById(id);
+		return this.paymentService.getById(paymentId);
 	}
 	
 	@PostMapping("add")
@@ -57,8 +58,14 @@ public class PaymentController {
 	}
 	
 	@DeleteMapping("delete/{id}")
-	Result add (@PathVariable int id) {
+	Result delete (@PathVariable int id) {
 		
 		return this.paymentService.delete(id);
+	}
+	
+	@PostMapping("getTotalPrice")
+	public DataResult<Double> calculateTotalPrice(@RequestBody CalculateTotalPriceRequest calculateTotalPriceRequest) {
+		System.out.println(calculateTotalPriceRequest.getReturnDate());
+		return this.paymentService.calculateTotalPriceForDisplay(calculateTotalPriceRequest);
 	}
 }

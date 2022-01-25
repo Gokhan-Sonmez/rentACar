@@ -32,8 +32,11 @@ public class Card {
 	@Column(name="name_on_the_card")
 	private String nameOnTheCard;
 	
-	@Column(name="expiration_date")
-	private String expirationDate;
+	@Column(name="month")
+	private String month;
+	
+	@Column(name="year")
+	private String year;
 	
 	@Column(name="cvv")
 	private int cvv ;

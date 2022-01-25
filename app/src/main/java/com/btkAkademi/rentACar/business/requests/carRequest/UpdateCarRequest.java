@@ -20,5 +20,6 @@ public class UpdateCarRequest {
 	private int kilometer;
 	private String description;
 	private int minAge;
+	private String imagePath;
 	
 }

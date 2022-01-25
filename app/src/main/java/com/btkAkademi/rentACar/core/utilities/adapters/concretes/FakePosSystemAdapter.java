@@ -19,7 +19,7 @@ public class FakePosSystemAdapter implements FakePosSystemService {
 	public Result checkIfCreditCardIsValid(Card card) {
 		
 		IsBank isBank = new IsBank();
-		if( isBank.isLimitExists(card.getCardNumber(),card.getNameOnTheCard(),card.getExpirationDate(),card.getCvv())) {
+		if( isBank.isLimitExists(card.getCardNumber(),card.getNameOnTheCard(),card.getMonth(),card.getYear(),card.getCvv())) {
 			return new SuccessResult();
 		}else {	
 			return new ErrorResult(Messages.limitNotEnough);
