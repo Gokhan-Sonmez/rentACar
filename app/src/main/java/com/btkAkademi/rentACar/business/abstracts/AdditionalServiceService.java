@@ -19,7 +19,7 @@ public interface AdditionalServiceService {
     DataResult<List<AdditionalServiceListDto>> getAllByRentalId(int rentalId);
 
 	
-	Result add(CreateAdditionalServiceRequest createAdditionalServiceRequest);
+	Result add(List<CreateAdditionalServiceRequest> createAdditionalServiceRequests);
 	Result update(UpdateAdditionalServiceRequest updateAdditionalServiceRequest);
 	Result delete(int id);
 

@@ -17,6 +17,9 @@ public class CreatePaymentRequest {
 	private int rentalId;
 	private LocalDate returnDate;
 	private LocalDate paymentDate;
-	private double moneyPaid; 
-	private Card card;
+	private String cardNumber;
+	private String nameOnTheCard;
+	private String month;
+	private String year;
+	private int cvv;
 }

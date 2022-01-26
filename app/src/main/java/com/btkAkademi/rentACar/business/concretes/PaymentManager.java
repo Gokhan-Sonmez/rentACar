@@ -91,13 +91,7 @@ public class PaymentManager implements PaymentService {
 	@Override
 	public Result add(CreatePaymentRequest createPaymentRequest) {
 
-		Result result = BusinessRules.run(checkIfCreditCardIsValid(createPaymentRequest.getCard()));
-
-		if (result != null) {
-
-			return result;
-		}
-
+	
 		Payment payment = modelMapperService.forRequest().map(createPaymentRequest, Payment.class);
 
 		int rentalId = createPaymentRequest.getRentalId();

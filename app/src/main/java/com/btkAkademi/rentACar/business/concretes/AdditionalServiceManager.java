@@ -66,12 +66,15 @@ public class AdditionalServiceManager implements AdditionalServiceService {
 	}
 
 	@Override
-	public Result add(CreateAdditionalServiceRequest createAdditionalServiceRequest) {
+	public Result add(List<CreateAdditionalServiceRequest> createAdditionalServiceRequests) {
 
-		AdditionalService additionalService = modelMapperService.forRequest().map(createAdditionalServiceRequest,
-				AdditionalService.class);
-		additionalService.setId(0);
-		additionalServiceDao.save(additionalService);
+		List<AdditionalService> response = createAdditionalServiceRequests.stream()
+				.map(service -> modelMapperService.forRequest().map(service, AdditionalService.class))
+				.collect(Collectors.toList());
+		for (AdditionalService service : response) {
+			service.setId(0);
+		}
+		this.additionalServiceDao.saveAll(response);
 		return new SuccessResult(Messages.additionalServiceAdded);
 	}
 

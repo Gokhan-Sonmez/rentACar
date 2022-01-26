@@ -53,11 +53,9 @@ public class AdditionalServiceController {
 	}
 	
 	@PostMapping("add")
-	public Result add(@RequestBody @Valid CreateAdditionalServiceRequest createAdditionalServiceRequest) {
-		
-		
-		return this.additionalServiceService.add(createAdditionalServiceRequest);
-		
+	public Result add(@RequestBody @Valid List<CreateAdditionalServiceRequest> createAdditionalService) {
+		return this.additionalServiceService.add(createAdditionalService);
+	
 	}
 	
 	@PostMapping("updated")

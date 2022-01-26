@@ -39,7 +39,7 @@ public class Card {
 	private String year;
 	
 	@Column(name="cvv")
-	private int cvv ;
+	private int cvv;
 	
 	@ManyToOne
 	@JoinColumn(name="customer_id")
