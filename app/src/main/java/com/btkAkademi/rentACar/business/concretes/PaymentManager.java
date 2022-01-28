@@ -16,11 +16,9 @@ import com.btkAkademi.rentACar.business.abstracts.PromoCodeService;
 import com.btkAkademi.rentACar.business.abstracts.RentalService;
 import com.btkAkademi.rentACar.business.constants.Messages;
 import com.btkAkademi.rentACar.business.dtos.AdditionalServiceListDto;
-import com.btkAkademi.rentACar.business.dtos.CarDto;
 import com.btkAkademi.rentACar.business.dtos.PaymentDto;
 import com.btkAkademi.rentACar.business.dtos.PaymentListDto;
 import com.btkAkademi.rentACar.business.dtos.RentalDto;
-import com.btkAkademi.rentACar.business.dtos.RentalListDto;
 import com.btkAkademi.rentACar.business.requests.RentalRequest.CalculateTotalPriceRequest;
 import com.btkAkademi.rentACar.business.requests.paymentRequest.CreatePaymentRequest;
 import com.btkAkademi.rentACar.business.requests.paymentRequest.UpdatePaymentRequest;
@@ -193,7 +191,7 @@ public class PaymentManager implements PaymentService {
 		if (rental.getPromoCodeId() != 0) {
 			double discountRate = 0;
 			discountRate = promoCodeService.getById(rental.getPromoCodeId()).getData().getDiscountRate();
-			totalPrice = totalPrice - (totalPrice * discountRate);
+			totalPrice = totalPrice - (totalPrice * discountRate/100);
 		}
 		// calculates total additional service price
 		List<AdditionalServiceListDto> services = additionalServiceService.getAllByRentalId(rental.getId()).getData();
